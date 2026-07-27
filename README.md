@@ -17,11 +17,11 @@ release/vX.Y.Z     → stabilisation avant déploiement
 
 Utilisez le format suivant :
 ```
-<type>/<initiales>/<id_ticket>-<slug>
+<type>/<initiales>/<slug>
 ```
 Exemples :
-- `feature/adama/245-auth-ldap`
-- `bugfix/youssouf/312-dashboard`
+- `feature/adama/auth-ldap`
+- `bugfix/youssouf/dashboard`
 
 # 📝 Convention de commit 
 [Documentation](https://www.conventionalcommits.org/en/v1.0.0/#specification)
