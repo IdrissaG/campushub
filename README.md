@@ -1,7 +1,7 @@
 # campushub
 
 Exercie Jour 1:
-1- Dans un projet SpringBoot simple, modéliser Etudiant, Cours, Inscription (records), puis avec les Streams : moyenne d'âge, groupement par filière, top 3 par note. Ajouter 3 tests JUnit 5. Livrable : PR mergée avec code + tests verts. Validation : historique Git propre, l'étudiant explique Optional et un groupingBy à l'oral.
+1- Dans un projet SpringBoot simple, modéliser Etudiant, Cours, Inscription (records), puis avec les Streams : moyenne d'âge, groupement par filière, top 3 par note. Ajouter 3 tests JUnit 5. Livrable : PR mergée avec code + tests verts. Validation : historique Git propre.
 
 # 🌿 Convention de nommage des branches
 Nous utilisons le modèle standard basé sur les branches **main/master**, **develop** et les branches secondaires :
