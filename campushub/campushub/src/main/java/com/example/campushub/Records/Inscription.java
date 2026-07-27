@@ -4,6 +4,7 @@ public record Inscription(
         Long id,
         Etudiant etudiant,
         Cours cours,
-        double note
+        double note,
+        double nbrCreditValide
 ) {
 }
