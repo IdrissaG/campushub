@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import sn.ept.campushub.domain.Etudiant;
 import sn.ept.campushub.domain.Filiere;
+import sn.ept.campushub.domain.Inscription;
 
 class StatistiqueServiceTest {
 
@@ -39,5 +40,24 @@ class StatistiqueServiceTest {
         assertThat(parFiliere).containsOnlyKeys(Filiere.GIT, Filiere.GC, Filiere.GEM);
         assertThat(parFiliere.get(Filiere.GIT)).containsExactlyInAnyOrder(MOR, ACHRAF);
         assertThat(parFiliere.get(Filiere.GC)).containsExactly(AWA);
+    }
+
+    @Test
+    @DisplayName("top3ParNote classe les 3 meilleures moyennes et ignore les etudiants sans note")
+    void top3ParNote_retourne_les_trois_meilleures_moyennes() {
+        List<Inscription> inscriptions = List.of(
+                new Inscription(MOR.id(), 10L, 16.0),
+                new Inscription(MOR.id(), 11L, 14.0),        // moyenne Mor = 15
+                new Inscription(ACHRAF.id(), 10L, 18.0),     // moyenne Achraf = 18
+                new Inscription(AWA.id(), 10L, 15.0),        // moyenne Awa = 15
+                new Inscription(IBOU.id(), 11L, null));      // pas encore note -> exclu
+
+        List<MoyenneEtudiant> top3 = service.top3ParNote(ETUDIANTS, inscriptions);
+
+        assertThat(top3).hasSize(3);
+        assertThat(top3.get(0)).isEqualTo(new MoyenneEtudiant(ACHRAF, 18.0));
+        assertThat(top3.get(1)).isEqualTo(new MoyenneEtudiant(MOR, 15.0));    // DIOP
+        assertThat(top3.get(2)).isEqualTo(new MoyenneEtudiant(AWA, 15.0));    // FALL
+        assertThat(top3).noneMatch(m -> m.etudiant().equals(IBOU));
     }
 }
