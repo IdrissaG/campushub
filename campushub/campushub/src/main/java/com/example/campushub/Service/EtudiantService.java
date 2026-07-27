@@ -22,7 +22,7 @@ public class EtudiantService {
                 .collect(Collectors.groupingBy(Etudiant::filiere));
     }
 
-    
+
     public List<Inscription> top3ParNote(List<Inscription> inscriptions) {
         return inscriptions.stream()
                 .sorted(Comparator.comparingDouble(Inscription::note).reversed())
