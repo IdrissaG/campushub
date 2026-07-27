@@ -1,70 +1,46 @@
-# campushub
+```markdown
+# CampusHub
 
-Exercie Jour 1:
-1- Dans un projet SpringBoot simple, modéliser Etudiant, Cours, Inscription (records), puis avec les Streams : moyenne d'âge, groupement par filière, top 3 par note. Ajouter 3 tests JUnit 5. Livrable : PR mergée avec code + tests verts. Validation : historique Git propre.
+CampusHub est un projet Spring Boot permettant de modéliser un système simple de gestion universitaire.
 
-# 🌿 Convention de nommage des branches
-Nous utilisons le modèle standard basé sur les branches **main/master**, **develop** et les branches secondaires :
+## Technologies utilisées
 
-```
-main/master        → code en production
-develop            → code validé & en attente de recette
-feature/...        → nouvelles fonctionnalités
-bugfix/...         → corrections non urgentes
-hotfix/...         → correctifs urgents pour production
-release/vX.Y.Z     → stabilisation avant déploiement
-```
+- Java 21
+- Spring Boot 3.5.4
+- Maven
+- JUnit 5
 
-Utilisez le format suivant :
-```
-<type>/<initiales>/<slug>
-```
-Exemples :
-- `feature/adama/auth-ldap`
-- `bugfix/youssouf/dashboard`
+## Fonctionnalités
 
-# 📝 Convention de commit 
-[Documentation](https://www.conventionalcommits.org/en/v1.0.0/#specification)
+Le projet contient les modèles suivants :
 
-Format :
-```text
-<type>(<scope>): <message court>
+- Etudiant
+- Cours
+- Inscription
 
-Description (optionnelle)
+Les objets métier sont représentés avec des records Java afin de simplifier la création de modèles immuables.
 
-Closes: #<ticket> (optionnel)
-```
-**Types autorisés :**
+Le service étudiant utilise l'API Java Streams pour réaliser :
 
-- `feat` : nouvelle fonctionnalité
-- `fix` : correction de bug
-- `docs` : documentation
-- `style` : formatage / lint
-- `refactor` : refactoring sans changement de comportement
-- `test` : ajout / modification de tests
-- `chore` : maintenance (scripts, dépendances...)
+- le calcul de la moyenne d'âge ;
+- le regroupement des étudiants par filière ;
+- la récupération des trois meilleurs étudiants selon leur note.
 
-**Exemples :**
+## Developpement
+Les fonctionnalités sont développées sur des branches dédiées avant d'être proposées via Pull Request vers la branche main.
+
+## Tests
+
+Les tests unitaires sont réalisés avec JUnit 5.
+
+Ils permettent de vérifier :
+
+- le calcul de la moyenne d'âge ;
+- le regroupement par filière ;
+- le classement des étudiants.
+
+Pour exécuter les tests :
+
 ```bash
-git commit -m "feat(auth): support LDAP
+.\mvnw.cmd clean test
 
-Closes: #245"
-```
-
-## 3. Pull Request
-
-### 🎯 Avant de créer la PR :
-- La branche est **poussée** : `git push origin feature/...`
-- Le pipeline CI/CD est **vert** (tests, build, qualité)
-- Les **tests unitaires** et **tests de non-régression** sont validés
-
-### 🛠 Création de la PR :
-- Cible : **source** = notre branche, **destination** = `develop`
-- Titre clair : `feat(auth): support LDAP via AD`
-- Description structurée :
-    - 📋 Objet de la PR
-    - ✅ Checklist :
-        - [x] Code testé localement
-        - [x] Tests unitaires ajoutés
-        - [x] Documentation à jour
-    - 🧪 Scénarios testés
