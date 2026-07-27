@@ -1,0 +1,6 @@
+com/campushub/model/Inscription.class
+com/campushub/service/EtudiantStatsService.class
+com/campushub/model/Etudiant.class
+com/campushub/model/Cours.class
+com/campushub/CampushubApplication.class
+com/campushub/model/ClassementEtudiant.class
