@@ -1,0 +1,99 @@
+{
+  "info": {
+    "name": "CampusHub - API Etudiants",
+    "description": "Collection Postman pour tester le CRUD en memoire de l'API Etudiants (G2 - Jour 2).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "etudiantId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "GET /api/etudiants - lister tous les etudiants",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/etudiants",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "etudiants"]
+        }
+      }
+    },
+    {
+      "name": "POST /api/etudiants - creer un etudiant",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nom\": \"Awa Diop\",\n  \"age\": 21,\n  \"filiere\": \"Informatique\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/etudiants",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "etudiants"]
+        }
+      }
+    },
+    {
+      "name": "GET /api/etudiants/{{etudiantId}} - recuperer un etudiant",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/etudiants/{{etudiantId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "etudiants", "{{etudiantId}}"]
+        }
+      }
+    },
+    {
+      "name": "PUT /api/etudiants/{{etudiantId}} - mettre a jour un etudiant",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nom\": \"Awa Diop\",\n  \"age\": 22,\n  \"filiere\": \"Genie Logiciel\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/etudiants/{{etudiantId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "etudiants", "{{etudiantId}}"]
+        }
+      }
+    },
+    {
+      "name": "DELETE /api/etudiants/{{etudiantId}} - supprimer un etudiant",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{baseUrl}}/api/etudiants/{{etudiantId}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "etudiants", "{{etudiantId}}"]
+        }
+      }
+    },
+    {
+      "name": "GET /api/etudiants/999 - cas 404",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/etudiants/999",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "etudiants", "999"]
+        }
+      }
+    }
+  ]
+}
