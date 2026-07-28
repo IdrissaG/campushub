@@ -4,7 +4,7 @@ import { EtudiantListComponent } from "./components/etudiant-list-component/etud
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, EtudiantListComponent],
+  imports: [RouterOutlet, EtudiantListComponent,],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
