@@ -11,12 +11,12 @@ export const routes: Routes = [
   // Route 1 : Liste
   { path: 'etudiants', component: EtudiantListComponent },
 
-  // Route 2 : Formulaire de création (OBLIGATOIRE avant :id)
+  // Route 2 : Formulaire de création 
   { path: 'etudiants/nouveau', component: EtudiantFormComponent },
 
   // Route 3 : Fiche détaillée d'un étudiant
   { path: 'etudiants/:id', component: EtudiantDetailComponent },
 
-  // Route 4 : Page 404 (toujours à la fin)
+  // Route 4 : Page 404 
   { path: '**', component: NotFoundComponent },
 ];
