@@ -1,6 +1,7 @@
 package com.campushub.service;
 
 import com.campushub.model.Etudiant;
+import com.campushub.model.Inscription;
 
 import java.util.Comparator;
 import java.util.List;
@@ -29,14 +30,12 @@ public class EtudiantService {
     }
 
 
-    public List<Etudiant> top3ParNote(
-            List<Etudiant> etudiants) {
+    public List<Inscription> top3ParNote(List<Inscription> inscriptions) {
 
-        return etudiants.stream()
+        return inscriptions.stream()
                 .sorted(
-                    Comparator.comparing(
-                        Etudiant::note
-                    ).reversed()
+                        Comparator.comparing(Inscription::note)
+                                .reversed()
                 )
                 .limit(3)
                 .toList();
