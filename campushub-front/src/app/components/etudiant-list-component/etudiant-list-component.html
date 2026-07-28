@@ -1,1 +1,10 @@
-<p>etudiant-list-component works!</p>
+<div class="container">
+    <h2>Liste des étudiants</h2>
+
+        @for (etudiant of etudiants; track etudiant.id) {
+           <app-etudiant-card-component [etudiant]="etudiant"></app-etudiant-card-component>
+        }
+
+  
+</div>
+

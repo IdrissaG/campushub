@@ -1,0 +1,19 @@
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', Arial, sans-serif;
+
+  h2 {
+    margin-bottom: 1.2rem;
+    color: #222;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #4a90d9;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.liste-etudiants {
+  display: grid;
+  gap: 1rem;
+}
