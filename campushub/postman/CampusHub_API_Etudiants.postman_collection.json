@@ -52,7 +52,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": null,\n  \"nom\": \"Gueye\",\n  \"prenom\": \"Fatima\",\n  \"filiere\": \"Économie\",\n  \"age\": 22\n}"
+              "raw": "{\n  \"nom\": \"Gueye\",\n  \"prenom\": \"Fatima\",\n  \"email\": \"fatima.gueye@example.com\",\n  \"filiere\": \"Économie\",\n  \"age\": 22\n}"
             },
             "url": {
               "raw": "http://localhost:8080/api/etudiants",
@@ -77,7 +77,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"id\": 1,\n  \"nom\": \"Diop\",\n  \"prenom\": \"Awa\",\n  \"filiere\": \"Informatique Appliquée\",\n  \"age\": 22\n}"
+              "raw": "{\n  \"nom\": \"Diop\",\n  \"prenom\": \"Awa\",\n  \"email\": \"awa.diop@example.com\",\n  \"filiere\": \"Informatique Appliquée\",\n  \"age\": 22\n}"
             },
             "url": {
               "raw": "http://localhost:8080/api/etudiants/1",
