@@ -13,4 +13,4 @@ jobs:
           distribution: 'temurin'
           
       - name: Build et tests backend
-        run: mvn -B clean verify
+        run: cd campushub &&mvn -B clean verify
