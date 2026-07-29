@@ -9,3 +9,4 @@ public class CampushubAuthApplication {
         SpringApplication.run(CampushubAuthApplication.class, args);
     }
 }
+ceci est un test
