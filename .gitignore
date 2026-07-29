@@ -8,3 +8,4 @@
 # IDE / Editor files
 .idea/
 .vscode/
+.claude/
