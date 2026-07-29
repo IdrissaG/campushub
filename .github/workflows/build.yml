@@ -1,8 +1,16 @@
 name: build
 on: [pull_request]
+
 jobs:
-  hello-build:
+  build-backend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "test"
+      
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          
+      - name: Build et tests backend
+        run: cd campushub &&mvn -B clean verify
