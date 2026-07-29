@@ -12,7 +12,6 @@ public class CoursService {
 
     private final CoursRepository coursRepository;
 
-
     public CoursService(CoursRepository coursRepository) {
         this.coursRepository = coursRepository;
     }
@@ -29,11 +28,12 @@ public class CoursService {
         return coursRepository.save(cours);
     }
 
-    public Optional<Cours> updateCours(String code, Cours cours) {
+    public Optional<Cours> updateCours(String code, Cours coursModifie) {
         if (!coursRepository.existsByCode(code)) {
             return Optional.empty();
         }
-        Cours coursAjour = new Cours(code, cours.nom());
+        // Reconstruction avec le code, le nom et les crédits
+        Cours coursAjour = new Cours(code, coursModifie.nom(), coursModifie.credits());
         return Optional.of(coursRepository.save(coursAjour));
     }
 

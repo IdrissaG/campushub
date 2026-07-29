@@ -33,12 +33,13 @@ public class EtudiantsService {
         if (!repository.existsById(id)) {
             return Optional.empty();
         }
+        // CORRECTION : Respect de l'ordre du Record officiel (id, nom, prenom, dateNaissance, filiere)
         Etudiant updated = new Etudiant(
-                id,
+                String.valueOf(id),
                 newEtudiant.nom(),
                 newEtudiant.prenom(),
-                newEtudiant.filiere(),
-                newEtudiant.age());
+                newEtudiant.dateNaissance(),
+                newEtudiant.filiere());
         return Optional.of(repository.save(updated));
     }
 

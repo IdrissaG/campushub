@@ -3,6 +3,7 @@ package gestion.campushub.repository;
 import gestion.campushub.model.Etudiant;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Repository
@@ -13,9 +14,9 @@ public class EtudiantRepository {
     private Long idSequence = 1L;
 
     public EtudiantRepository() {
-        // 2 étudiants par défaut pour tester les GET tout de suite
-        save(new Etudiant(null, "Diop", "Awa", "Informatique", 21));
-        save(new Etudiant(null, "Fall", "Moussa", "Gestion", 23));
+        // CORRECTION : Utilisation de LocalDate et respect de l'ordre (id, nom, prenom, dateNaissance, filiere)
+        save(new Etudiant(null, "Diop", "Awa", LocalDate.of(2005, 5, 12), "Informatique"));
+        save(new Etudiant(null, "Fall", "Moussa", LocalDate.of(2003, 3, 20), "Gestion"));
     }
 
     public List<Etudiant> findAll() {
@@ -27,9 +28,17 @@ public class EtudiantRepository {
     }
 
     public Etudiant save(Etudiant etudiant) {
-        Long id = (etudiant.id() != null) ? etudiant.id() : idSequence++;
-        Etudiant saved = new Etudiant(id, etudiant.nom(), etudiant.prenom(), etudiant.filiere(), etudiant.age());
-        etudiantsDb.put(id, saved);
+        // CORRECTION : Conversion de l'ID en String pour le Record, tout en conservant la séquence Long
+        Long numericId = (etudiant.id() != null) ? Long.valueOf(etudiant.id()) : idSequence++;
+        
+        Etudiant saved = new Etudiant(
+            String.valueOf(numericId), 
+            etudiant.nom(), 
+            etudiant.prenom(), 
+            etudiant.dateNaissance(), 
+            etudiant.filiere()
+        );
+        etudiantsDb.put(numericId, saved);
         return saved;
     }
 

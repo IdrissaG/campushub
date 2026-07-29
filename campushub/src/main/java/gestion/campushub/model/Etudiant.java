@@ -1,16 +1,17 @@
 package gestion.campushub.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import java.time.LocalDate;
+import java.time.Period;
 
 public record Etudiant(
-        Long id,
-        @NotBlank(message = "Le nom ne peut pas être vide")
-        String nom,
-        @NotBlank(message = "Le prénom ne peut pas être vide")
-        String prenom,
-        @NotBlank(message = "La filière ne peut pas être vide")
-        String filiere,
-        @Positive(message = "L'âge doit être positif")
-        int age
-) {}
+    String id,
+    String nom,
+    String prenom,
+    LocalDate dateNaissance,
+    String filiere
+) {
+    public int getAge() {
+        if (dateNaissance == null) return 0;
+        return Period.between(dateNaissance, LocalDate.now()).getYears();
+    }
+}

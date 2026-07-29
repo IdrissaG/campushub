@@ -1,6 +1,9 @@
 package gestion.campushub.controller;
 
-import gestion.campushub.model.Etudiant;
+import gestion.campushub.dto.EtudiantRequest;
+import gestion.campushub.dto.EtudiantResponse;
+import gestion.campushub.mapper.EtudiantMapper;
+import gestion.campushub.model.Etudiant; // Package officiel restauré
 import gestion.campushub.service.EtudiantsService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -8,51 +11,55 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/etudiants")
 public class EtudiantController {
 
     private final EtudiantsService service;
+    private final EtudiantMapper etudiantMapper;
 
-    // Injection par constructeur (Consigne respectée !)
-    public EtudiantController(EtudiantsService service) {
+    public EtudiantController(EtudiantsService service, EtudiantMapper etudiantMapper) {
         this.service = service;
+        this.etudiantMapper = etudiantMapper;
     }
 
-    // 1. GET /api/etudiants -> 200 OK
     @GetMapping
-    public ResponseEntity<List<Etudiant>> getAllEtudiants() {
-        return ResponseEntity.ok(service.getAllEtudiants());
+    public ResponseEntity<List<EtudiantResponse>> getAllEtudiants() {
+        List<EtudiantResponse> responses = service.getAllEtudiants().stream()
+                .map(etudiantMapper::toResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
     }
 
-    // 2. GET /api/etudiants/{id} -> 200 OK ou 404 Not Found
     @GetMapping("/{id}")
-    public ResponseEntity<Etudiant> getEtudiantById(@PathVariable Long id) {
-        return service.getEtudiantById(id)
+    public ResponseEntity<EtudiantResponse> getEtudiantById(@PathVariable String id) {
+        return service.getEtudiantById(Long.valueOf(id))
+                .map(etudiantMapper::toResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 3. POST /api/etudiants -> 201 Created
     @PostMapping
-    public ResponseEntity<Etudiant> createEtudiant(@Valid @RequestBody Etudiant etudiant) {
+    public ResponseEntity<EtudiantResponse> createEtudiant(@Valid @RequestBody EtudiantRequest request) {
+        Etudiant etudiant = etudiantMapper.toEntity(request);
         Etudiant created = service.createEtudiant(etudiant);
-        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(etudiantMapper.toResponse(created));
     }
 
-    // 4. PUT /api/etudiants/{id} -> 200 OK ou 404 Not Found
     @PutMapping("/{id}")
-    public ResponseEntity<Etudiant> updateEtudiant(@PathVariable Long id, @Valid @RequestBody Etudiant etudiant) {
-        return service.updateEtudiant(id, etudiant)
+    public ResponseEntity<EtudiantResponse> updateEtudiant(@PathVariable String id, @Valid @RequestBody EtudiantRequest request) {
+        Etudiant etudiantModifie = etudiantMapper.toEntity(request);
+        return service.updateEtudiant(Long.valueOf(id), etudiantModifie)
+                .map(etudiantMapper::toResponse)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 5. DELETE /api/etudiants/{id} -> 204 No Content ou 404 Not Found
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEtudiant(@PathVariable Long id) {
-        boolean deleted = service.deleteEtudiant(id);
+    public ResponseEntity<Void> deleteEtudiant(@PathVariable String id) {
+        boolean deleted = service.deleteEtudiant(Long.valueOf(id));
         if (deleted) {
             return ResponseEntity.noContent().build();
         }
