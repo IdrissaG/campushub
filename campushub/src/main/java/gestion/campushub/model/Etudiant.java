@@ -9,6 +9,8 @@ public record Etudiant(
         String nom,
         @NotBlank(message = "Le prénom ne peut pas être vide")
         String prenom,
+        @NotBlank(message = "L'email ne peut pas être vide")
+        String email,
         @NotBlank(message = "La filière ne peut pas être vide")
         String filiere,
         @Positive(message = "L'âge doit être positif")
