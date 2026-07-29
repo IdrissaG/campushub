@@ -8,5 +8,8 @@ import { Etudiant } from '../../model/etudiant.interface';
   styleUrl: './etudiant-card-component.scss',
 })
 export class EtudiantCardComponent {
-  etudiant = input<Etudiant>({ id: 1, nom: 'Sow', prenom: 'Ibrahima', filiere: 'Info' });
+  etudiant = input<Etudiant>({
+    id: 1, nom: 'Sow', prenom: 'Ibrahima', filiere: 'Info',email: "isow@gmail.com",
+    age: 0
+  });
 }
