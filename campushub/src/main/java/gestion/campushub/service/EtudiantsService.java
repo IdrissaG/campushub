@@ -37,6 +37,7 @@ public class EtudiantsService {
                 id,
                 newEtudiant.nom(),
                 newEtudiant.prenom(),
+                newEtudiant.email(),
                 newEtudiant.filiere(),
                 newEtudiant.age());
         return Optional.of(repository.save(updated));
