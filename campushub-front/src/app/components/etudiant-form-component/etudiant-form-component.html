@@ -1,4 +1,4 @@
-<form [formGroup]="etudiantForm" (ngSubmit)="onSubmit()" action="redir">
+<form [formGroup]="etudiantForm" (ngSubmit)="onSubmit()">
 
   <!-- NOM -->
   <div>
@@ -52,5 +52,11 @@
   <button type="submit" [disabled]="etudiantForm.invalid">
     Créer l'étudiant
   </button>
-
+  @if (erreurServeur().length > 0) {
+    <div class="erreurs">
+      @for (erreur of erreurServeur(); track erreur) {
+        <p>{{ erreur }}</p>
+      }
+    </div>
+  }
 </form>

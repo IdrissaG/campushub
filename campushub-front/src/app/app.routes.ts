@@ -7,6 +7,7 @@ import { NotFoundComponent } from './components/not-found-component/not-found-co
 export const routes: Routes = [
   // Redirection par défaut vers /etudiants
   { path: '', redirectTo: 'etudiants', pathMatch: 'full' },
+  
 
   // Route 1 : Liste
   { path: 'etudiants', component: EtudiantListComponent },
