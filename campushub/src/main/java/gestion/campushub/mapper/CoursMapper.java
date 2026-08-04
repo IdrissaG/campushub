@@ -9,12 +9,12 @@ import java.util.List;
 
 public class CoursMapper {
     public static CoursResponse toResponse(Cours cours){
-        CoursResponse coursResponse = new CoursResponse(cours.code(), cours.nom());
+        CoursResponse coursResponse = new CoursResponse(cours.getCode(), cours.getNom());
         return coursResponse;
     }
 
     public static CoursRequest toRequest(Cours cours){
-        CoursRequest coursRequest = new CoursRequest(cours.code(), cours.nom());
+        CoursRequest coursRequest = new CoursRequest(cours.getCode(), cours.getNom());
         return coursRequest;
     }
 
