@@ -50,13 +50,54 @@ bugfix/youssouf/calcul-moyenne-age
 ## Qualité du code et tests
 
 - Respectez l'organisation existante des packages `gestion.campushub`.
-- Utilisez des `record` pour les modèles métier lorsque cela correspond au
-  besoin existant.
+- À partir du jour 4, les modèles persistés (`Etudiant`, `Cours`, `Inscription`) sont des entités JPA et non des `record`.
+- Les `record` restent autorisés pour les DTO (`EtudiantRequest`, `EtudiantResponse`, etc.).
 - Pour les traitements de collections, privilégiez les Streams Java lorsque
   c'est pertinent et gardez le code lisible.
 - Ajoutez des tests JUnit 5 pour tout nouveau comportement ou pour toute
   correction de bug.
 - Vérifiez le build avec `./mvnw test` (ou `.\mvnw.cmd test` sous Windows).
+
+## Transition vers les entités JPA (Jour 4)
+
+À partir du jour 4, les modèles `Etudiant`, `Cours` et `Inscription` ne doivent plus être des `record`. Ils deviennent des classes annotées JPA afin d’être persistés dans PostgreSQL.
+
+### Modèle à appliquer
+
+```java
+import jakarta.persistence.*;
+import lombok.Getter;
+
+@Entity
+@Getter
+@Table(name = "etudiant")
+public class Etudiant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nom;
+    private String prenom;
+    private String email;
+    private int age;
+    private String filiere;
+
+    protected Etudiant() {
+    }
+
+    public Etudiant(String nom, String prenom, String email, int age, String filiere) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.age = age;
+        this.filiere = filiere;
+    }
+}
+```
+- Utiliser Lombok `@Getter` sur les entités pour générer les getters sans écrire de code répétitif.
+- Ne pas utiliser `@Data` sur les entités JPA, car il génère notamment `equals`, `hashCode` et `toString`, ce qui peut causer des problèmes avec les relations JPA.
+- Ne pas ajouter de setters sauf nécessité justifiée.
 
 ### Convention de nommage des packages
 

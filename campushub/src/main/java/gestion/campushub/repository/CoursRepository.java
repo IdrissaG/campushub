@@ -23,7 +23,7 @@ public class CoursRepository {
     }
 
     public Cours save(Cours cours) {
-        stockageCours.put(cours.code(), cours);
+        stockageCours.put(cours.getCode(), cours);
         return cours;
     }
 
