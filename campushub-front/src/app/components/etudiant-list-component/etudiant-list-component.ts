@@ -5,7 +5,9 @@ import { EtudiantService } from '../../services/etudiant-service';
 
 @Component({
   selector: 'app-etudiant-list-component',
+  standalone: true,
   imports: [EtudiantCardComponent],
+  
   templateUrl: './etudiant-list-component.html',
   styleUrl: './etudiant-list-component.scss',
 })
