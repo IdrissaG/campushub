@@ -5,4 +5,7 @@
   <h3>Prenom: {{ etudiant().age }}</h3>
   <p>Filiere: {{ etudiant().filiere }}</p>
   <p>Email : {{ etudiant().email }}</p>
+  <a [routerLink]="['/etudiants', etudiant().id]">Voir détails</a>
+  
 </div>
+

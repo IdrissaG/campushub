@@ -1,9 +1,11 @@
 import { Component, input } from '@angular/core';
 import { Etudiant } from '../../model/etudiant.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-etudiant-card-component',
-  imports: [],
+  imports: [RouterLink],
+
   templateUrl: './etudiant-card-component.html',
   styleUrl: './etudiant-card-component.scss',
 })

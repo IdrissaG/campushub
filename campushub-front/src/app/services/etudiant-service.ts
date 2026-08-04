@@ -13,6 +13,9 @@ export class EtudiantService {
   getAll(): Observable<Etudiant[]> {
     return this.http.get<Etudiant[]>(this.apiUrl);
   }
+  getById(id: number): Observable<EtudiantResponse> {
+    return this.http.get<EtudiantResponse>(`${this.apiUrl}/${id}`);
+  }
 
   create(etudiant: EtudiantRequest): Observable<EtudiantResponse> {
       return this.http.post<EtudiantResponse>(this.apiUrl, etudiant);
