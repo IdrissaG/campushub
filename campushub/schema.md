@@ -6,7 +6,7 @@
 
 
 
-Le schéma repose sur 4 tables principales : `etudiant`, `cours`, `inscription` (relation many-to-many enrichie entre étudiant et cours), et `utilisateur` (authentification, ajoutée jour 4).
+Le schéma repose sur 3 tables principales : `etudiant`, `cours`, `inscription` (relation many-to-many enrichie entre étudiant et cours).
 
 
 
