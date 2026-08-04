@@ -8,23 +8,22 @@ public class EtudiantMapper {
 
     public static EtudiantResponse toResponse(Etudiant etudiant) {
         return new EtudiantResponse(
-            etudiant.id(),
-            etudiant.nom(),
-            etudiant.prenom(),
-            etudiant.email(),
-            etudiant.age(),
-            etudiant.filiere()
+            etudiant.getId(),
+            etudiant.getNom(),
+            etudiant.getPrenom(),
+            etudiant.getEmail(),
+            etudiant.getAge(),
+            etudiant.getFiliere()
         );
     }
 
     public static Etudiant toEntity(EtudiantRequest request) {
         return new Etudiant(
-            null,
             request.nom(),
             request.prenom(),
             request.email(),
-            request.filiere(),
-            request.age()
+            request.age(),
+            request.filiere()
         );
     }
 }
