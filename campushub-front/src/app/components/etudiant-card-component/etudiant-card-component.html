@@ -1,11 +1,10 @@
 <div class="card">  
   <h3>Nom: {{ etudiant().nom }}</h3>
   <h3>Prenom: {{ etudiant().prenom }}</h3>
-  <h3>Prenom: {{ etudiant().email }}</h3>
-  <h3>Prenom: {{ etudiant().age }}</h3>
+  <h3>Age: {{ etudiant().age }}</h3>
   <p>Filiere: {{ etudiant().filiere }}</p>
   <p>Email : {{ etudiant().email }}</p>
-  <a [routerLink]="['/etudiants', etudiant().id]">Voir détails</a>
+
   
 </div>
 
