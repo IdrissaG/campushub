@@ -2,9 +2,11 @@ package gestion.campushub.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "etudiant")
 public class Etudiant {
 
