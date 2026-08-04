@@ -43,6 +43,11 @@ public class CoursService {
     }
 
     public boolean deleteCours(String code) {
-        return coursRepository.deleteByCode(code);
+        return coursRepository.findByCode(code)
+                .map(cours -> {
+                    coursRepository.delete(cours);
+                    return true;
+                })
+                .orElse(false);
     }
 }
