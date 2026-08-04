@@ -24,7 +24,6 @@ public class EtudiantMapper {
             request.email(),
             request.age(),
             request.filiere()
-
         );
     }
 }

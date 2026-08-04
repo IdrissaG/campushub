@@ -19,7 +19,7 @@ public class Cours{
     private String nom;
 
     @OneToMany(mappedBy = "cours")
-    private Set<Inscription> Inscriptions = new HashSet<>();
+    private Set<Inscription> inscriptions = new HashSet<>();
 
     protected Cours(){}
     public Cours (String code, String nom){
