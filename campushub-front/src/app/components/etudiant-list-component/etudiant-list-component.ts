@@ -10,14 +10,22 @@ import { EtudiantService } from '../../services/etudiant-service';
   styleUrl: './etudiant-list-component.scss',
 })
 
-export class EtudiantListComponent implements OnInit{
+export class EtudiantListComponent implements OnInit {
+
   etudiants: Etudiant[] = [];
+
   private etudiantService = inject(EtudiantService);
 
   ngOnInit() {
     this.etudiantService.getAll().subscribe({
-      next: (data) => this.etudiants = data,
-      error: (err) => console.error('Erreur API', err)
+      next: (data) => {
+        console.log('Étudiants reçus :', data);
+        this.etudiants = data;
+      },
+      error: (err) => {
+        console.error('Erreur API', err);
+      }
     });
+  }
 }
-}
+

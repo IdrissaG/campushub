@@ -2,6 +2,7 @@ import { inject, Service } from '@angular/core';
 import { Etudiant } from '../model/etudiant.interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { EtudiantRequest, EtudiantResponse } from '../model/etudiant-api.interface';
 
 @Service()
 export class EtudiantService {
@@ -13,7 +14,9 @@ export class EtudiantService {
        return this.http.get<Etudiant[]>(this.apiUrl);
     }
     // methode create à ajouter pour créer un nouvel étudiant
-    //create(etudiant: EtudiantRequest): Observable<EtudiantResponse> {
-    //    return this.http.post<EtudiantResponse>(this.apiUrl, etudiant);
-    //}
+    create(etudiant: EtudiantRequest): Observable<EtudiantResponse> {
+        return this.http.post<EtudiantResponse>(this.apiUrl, etudiant);
+    }
 }
+
+
