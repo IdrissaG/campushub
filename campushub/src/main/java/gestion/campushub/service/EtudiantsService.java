@@ -2,9 +2,10 @@ package gestion.campushub.service;
 
 import gestion.campushub.model.Etudiant;
 import gestion.campushub.repository.EtudiantRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,8 @@ public class EtudiantsService {
         this.repository = repository;
     }
 
-    public List<Etudiant> getAllEtudiants() {
-        return repository.findAll();
+    public Page<Etudiant> getAllEtudiants(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Optional<Etudiant> getEtudiantById(Long id) {
