@@ -14,10 +14,10 @@ export class EtudiantService {
     return this.http.get<Etudiant[]>(this.apiUrl);
   }
 
-  // methode create à ajouter pour créer un nouvel étudiant
   create(etudiant: EtudiantRequest): Observable<EtudiantResponse> {
       return this.http.post<EtudiantResponse>(this.apiUrl, etudiant);
+
+
   }
 }
-
 

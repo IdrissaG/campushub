@@ -6,7 +6,3 @@ export interface Etudiant {
   age: number;
   filiere: String
 }
-
-
-
-
