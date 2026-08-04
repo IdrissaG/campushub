@@ -18,7 +18,7 @@ export interface EtudiantRequest {
 }
 
 export interface EtudiantResponse {
-  id: number;
+  id: number; // car l'id est cree par le backend
   nom: string;
   prenom: string;
   email: string;
