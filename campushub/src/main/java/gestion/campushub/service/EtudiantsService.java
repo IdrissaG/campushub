@@ -34,12 +34,11 @@ public class EtudiantsService {
             return Optional.empty();
         }
         Etudiant updated = new Etudiant(
-                id,
-                newEtudiant.nom(),
-                newEtudiant.prenom(),
-                newEtudiant.email(),
-                newEtudiant.filiere(),
-                newEtudiant.age());
+                newEtudiant.getNom(),
+                newEtudiant.getPrenom(),
+                newEtudiant.getEmail(),
+                newEtudiant.getAge(),
+                newEtudiant.getFiliere());
         return Optional.of(repository.save(updated));
     }
 

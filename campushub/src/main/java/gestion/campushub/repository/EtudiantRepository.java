@@ -14,8 +14,8 @@ public class EtudiantRepository {
 
     public EtudiantRepository() {
         // 2 étudiants par défaut pour tester les GET tout de suite
-        save(new Etudiant(null, "Diop", "Awa", "awa.diop@example.com", "Informatique", 21));
-        save(new Etudiant(null, "Fall", "Moussa", "moussa.fall@example.com", "Gestion", 23));
+        save(new Etudiant( "Diop", "Awa",  "Informatique", 21,"awa.diop@example.com"));
+        save(new Etudiant( "Fall", "Moussa", "moussa.fall@example.com",  23,"Gestion"));
     }
 
     public List<Etudiant> findAll() {
@@ -27,8 +27,8 @@ public class EtudiantRepository {
     }
 
     public Etudiant save(Etudiant etudiant) {
-        Long id = (etudiant.id() != null) ? etudiant.id() : idSequence++;
-        Etudiant saved = new Etudiant(id, etudiant.nom(), etudiant.prenom(), etudiant.email(), etudiant.filiere(), etudiant.age());
+        Long id = (etudiant.getId() != null) ? etudiant.getId() : idSequence++;
+        Etudiant saved = new Etudiant( etudiant.getNom(), etudiant.getPrenom(), etudiant.getEmail(), etudiant.getAge(),etudiant.getFiliere());
         etudiantsDb.put(id, saved);
         return saved;
     }
