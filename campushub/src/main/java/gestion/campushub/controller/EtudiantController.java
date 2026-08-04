@@ -6,15 +6,18 @@ import gestion.campushub.mapper.EtudiantMapper;
 import gestion.campushub.model.Etudiant;
 import gestion.campushub.service.EtudiantsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/etudiants")
@@ -29,13 +32,18 @@ public class EtudiantController {
     }
 
     @GetMapping
-    @Operation(summary = "Récupérer tous les étudiants")
-    @ApiResponse(responseCode = "200", description = "Liste des étudiants")
-    public ResponseEntity<List<EtudiantResponse>> getAll() {
+    @Operation(summary = "Récupérer tous les étudiants (pagination et tri)")
+    @ApiResponse(responseCode = "200", description = "Page d'étudiants")
+    public ResponseEntity<Page<EtudiantResponse>> getAll(
+            @Parameter(description = "Numéro de la page (commence à 0)", example = "0")
+            @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Nombre d'étudiants par page", example = "10")
+            @RequestParam(defaultValue = "10") int size,
+            @Parameter(description = "Champ sur lequel trier (ex: nom, prenom, age, filiere)", example = "nom")
+            @RequestParam(defaultValue = "nom") String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return ResponseEntity.ok(
-            service.getAllEtudiants().stream()
-                .map(EtudiantMapper::toResponse)
-                .toList()
+            service.getAllEtudiants(pageable).map(EtudiantMapper::toResponse)
         );
     }
 
