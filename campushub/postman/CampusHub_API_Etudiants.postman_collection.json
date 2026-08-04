@@ -1,0 +1,118 @@
+{
+  "info": {
+    "name": "CampusHub API Étudiants",
+    "description": "Collection d'endpoints CRUD pour la gestion des étudiants",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Étudiants",
+      "item": [
+        {
+          "name": "GET - Tous les étudiants",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/etudiants",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "etudiants"]
+            },
+            "description": "Récupère la liste de tous les étudiants (200 OK)"
+          },
+          "response": []
+        },
+        {
+          "name": "GET - Étudiant par ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/etudiants/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "etudiants", "1"]
+            },
+            "description": "Récupère un étudiant par son ID (200 OK ou 404 Not Found)"
+          },
+          "response": []
+        },
+        {
+          "name": "POST - Créer un nouvel étudiant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Gueye\",\n  \"prenom\": \"Fatima\",\n  \"email\": \"fatima.gueye@example.com\",\n  \"filiere\": \"Économie\",\n  \"age\": 22\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/etudiants",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "etudiants"]
+            },
+            "description": "Crée un nouvel étudiant (201 Created)"
+          },
+          "response": []
+        },
+        {
+          "name": "PUT - Modifier un étudiant",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Diop\",\n  \"prenom\": \"Awa\",\n  \"email\": \"awa.diop@example.com\",\n  \"filiere\": \"Informatique Appliquée\",\n  \"age\": 22\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/etudiants/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "etudiants", "1"]
+            },
+            "description": "Met à jour un étudiant existant (200 OK ou 404 Not Found)"
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE - Supprimer un étudiant",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/etudiants/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "etudiants", "1"]
+            },
+            "description": "Supprime un étudiant (204 No Content ou 404 Not Found)"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
