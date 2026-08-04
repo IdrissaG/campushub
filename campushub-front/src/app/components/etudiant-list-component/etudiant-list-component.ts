@@ -6,13 +6,17 @@ import { PageResponse } from '../../model/page-response.model';
 
 @Component({
   selector: 'app-etudiant-list-component',
+  standalone: true,
   imports: [EtudiantCardComponent],
+  
   templateUrl: './etudiant-list-component.html',
   styleUrl: './etudiant-list-component.scss',
 })
 
-export class EtudiantListComponent implements OnInit{
+export class EtudiantListComponent implements OnInit {
+
   etudiants: Etudiant[] = [];
+
   private etudiantService = inject(EtudiantService);
 
   loading = signal(true);
@@ -29,5 +33,6 @@ export class EtudiantListComponent implements OnInit{
         this.loading.set(false);
       }
     });
+  }
 }
-}
+

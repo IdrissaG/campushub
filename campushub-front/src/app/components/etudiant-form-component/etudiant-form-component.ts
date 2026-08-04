@@ -1,33 +1,52 @@
-import { Component, inject } from '@angular/core'; // inject : nouvelle syntaxe Angular pour l'injection de dépendances
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+
+import { EtudiantService } from '../../services/etudiant-service';
+import { EtudiantRequest } from '../../model/etudiant-api.interface';
 
 @Component({
   selector: 'app-etudiant-form-component',
-  imports: [ReactiveFormsModule], // rend les directives [formGroup] et formControlName disponibles dans le template
+  imports: [ReactiveFormsModule],
   templateUrl: './etudiant-form-component.html',
   styleUrl: './etudiant-form-component.scss',
 })
 export class EtudiantFormComponent {
-  etudiantForm: FormGroup;
-  private router = inject(Router); // inject() remplace l'injection par constructeur pour les versions modernes d'Angular
 
-  constructor(private fb: FormBuilder) {
-    this.etudiantForm = this.fb.group({
-      // ['valeur_initiale', validator(s)]
-      nom:     ['', Validators.required],
-      prenom:  ['', Validators.required],
-      email:   ['', [Validators.required, Validators.email]],  // tableau quand plusieurs validators
-      age:     ['', [Validators.required, Validators.min(15)]],
-      filiere: [''], // pas de validation obligatoire
-    });
-  }
+  private fb = inject(NonNullableFormBuilder);
+  private router = inject(Router);
+  private etudiantService = inject(EtudiantService);
+
+  erreurServeur = signal<string[]>([]);
+
+  etudiantForm = this.fb.group({
+    nom: ['', Validators.required],
+    prenom: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    age: [0, [Validators.required, Validators.min(15)]],
+    filiere: ['']
+  });
 
   onSubmit(): void {
-    // on ne traite les données que si tout le formulaire est valide
     if (this.etudiantForm.valid) {
-      console.log(this.etudiantForm.value); // { nom: '...', prenom: '...', email: '...', ... }
-      this.router.navigate(['/etudiants']); // redirection vers la liste après soumission
+
+      const request: EtudiantRequest =
+        this.etudiantForm.getRawValue();
+
+      this.etudiantService.create(request).subscribe({
+        next: () => {
+          this.router.navigate(['/etudiants']);
+        },
+
+        error: (err: HttpErrorResponse) => {
+          this.erreurServeur.set(
+            err.error?.erreurs ?? [
+              'Une erreur est survenue lors de la création de l’étudiant.'
+            ]
+          );
+        }
+      });
     }
   }
 }
