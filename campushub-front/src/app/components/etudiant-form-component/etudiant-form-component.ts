@@ -30,4 +30,7 @@ export class EtudiantFormComponent {
       this.router.navigate(['/etudiants']); // redirection vers la liste après soumission
     }
   }
+
+  //injecter EtudiantService pour créer un nouvel étudiant via l'API
+  
 }
