@@ -13,24 +13,20 @@ public class Utilisateur {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "mot_de_passe_hash", nullable = false)
     private String motDePasse;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(nullable = false)
-    private String nom;
-
     protected Utilisateur() {
     }
 
-    public Utilisateur(String email, String motDePasse, Role role, String nom) {
+    public Utilisateur(String email, String motDePasse, Role role) {
         this.email = email;
         this.motDePasse = motDePasse;
         this.role = role;
-        this.nom = nom;
     }
 
     public Long getId() {
@@ -49,10 +45,6 @@ public class Utilisateur {
         return role;
     }
 
-    public String getNom() {
-        return nom;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -68,9 +60,4 @@ public class Utilisateur {
     public void setRole(Role role) {
         this.role = role;
     }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
 }
-
