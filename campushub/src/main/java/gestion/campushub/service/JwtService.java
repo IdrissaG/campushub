@@ -1,5 +1,5 @@
 package gestion.campushub.service;
-
+import org.springframework.security.core.userdetails.UserDetails;
 import gestion.campushub.model.Utilisateur;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -30,10 +30,11 @@ public class JwtService {
         return buildToken(claims, utilisateur.getEmail());
     }
 
-    public boolean isTokenValid(String token, Utilisateur utilisateur) {
+    public boolean isTokenValid(String token, UserDetails userDetails) {
         String username = extractUsername(token);
-        return username.equals(utilisateur.getEmail()) && !isTokenExpired(token);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
+
 
     private String buildToken(Map<String, Object> extraClaims, String username) {
         long now = System.currentTimeMillis();
