@@ -1,12 +1,26 @@
-<div class="container">
+<div class="max-w-7xl mx-auto">
+  <h1 class="text-2xl font-bold text-slate-800 mb-6">Liste des étudiants</h1>
+
   @if (loading()) {
-    <p>Chargement...</p>
+    <!-- Skeletons en grille pour le chargement -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (i of [1, 2, 3]; track i) {
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-pulse space-y-3">
+          <div class="h-5 bg-slate-200 rounded w-1/2"></div>
+          <div class="h-4 bg-slate-200 rounded w-full"></div>
+          <div class="h-4 bg-slate-200 rounded w-3/4"></div>
+        </div>
+      }
+    </div>
   } @else if (erreur()) {
-    <p class="erreur">{{ erreur() }}</p>
+    <div class="bg-red-50 text-red-600 p-4 rounded-xl border border-red-200 text-center font-medium">
+      {{ erreur() }}
+    </div>
   } @else {
-    @for (etudiant of etudiants; track etudiant.id) {
-      <app-etudiant-card-component [etudiant]="etudiant" />
-    }
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (etudiant of etudiants; track etudiant.id) {
+        <app-etudiant-card-component [etudiant]="etudiant" />
+      }
+    </div>
   }
 </div>
-
