@@ -1,16 +1,33 @@
 package gestion.campushub.model;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-public record Etudiant(
-        Long id,
-        @NotBlank(message = "Le nom ne peut pas être vide")
-        String nom,
-        @NotBlank(message = "Le prénom ne peut pas être vide")
-        String prenom,
-        @NotBlank(message = "La filière ne peut pas être vide")
-        String filiere,
-        @Positive(message = "L'âge doit être positif")
-        int age
-) {}
+@Entity
+@Getter
+@Setter
+@Table(name = "etudiant")
+public class Etudiant {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nom;
+    private String prenom;
+    private String email;
+    private int age;
+    private String filiere;
+
+    protected Etudiant() {
+    }
+
+    public Etudiant(String nom, String prenom, String email, int age, String filiere) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.age = age;
+        this.filiere = filiere;
+    }
+}

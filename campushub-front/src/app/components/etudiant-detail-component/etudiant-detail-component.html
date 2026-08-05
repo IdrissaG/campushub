@@ -1,1 +1,12 @@
-<p>etudiant-detail-component works!</p>
+@if (etudiant(); as e) {
+  <div class="container">
+    <h2>{{ e.prenom }} {{ e.nom }}</h2>
+    <p><strong>Email :</strong> {{ e.email }}</p>
+    <p><strong>Âge :</strong> {{ e.age }}</p>
+    <p><strong>Filière :</strong> {{ e.filiere }}</p>
+  </div>
+} @else if (erreur()) {
+  <p class="erreur">{{ erreur() }}</p>
+} @else {
+  <p>Chargement...</p>
+}

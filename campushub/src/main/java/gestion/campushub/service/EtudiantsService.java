@@ -2,9 +2,10 @@ package gestion.campushub.service;
 
 import gestion.campushub.model.Etudiant;
 import gestion.campushub.repository.EtudiantRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,8 +18,8 @@ public class EtudiantsService {
         this.repository = repository;
     }
 
-    public List<Etudiant> getAllEtudiants() {
-        return repository.findAll();
+    public Page<Etudiant> getAllEtudiants(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     public Optional<Etudiant> getEtudiantById(Long id) {
@@ -30,19 +31,21 @@ public class EtudiantsService {
     }
 
     public Optional<Etudiant> updateEtudiant(Long id, Etudiant newEtudiant) {
-        if (!repository.existsById(id)) {
-            return Optional.empty();
-        }
-        Etudiant updated = new Etudiant(
-                id,
-                newEtudiant.nom(),
-                newEtudiant.prenom(),
-                newEtudiant.filiere(),
-                newEtudiant.age());
-        return Optional.of(repository.save(updated));
+        return repository.findById(id).map(existing -> {
+            existing.setNom(newEtudiant.getNom());
+            existing.setPrenom(newEtudiant.getPrenom());
+            existing.setEmail(newEtudiant.getEmail());
+            existing.setAge(newEtudiant.getAge());
+            existing.setFiliere(newEtudiant.getFiliere());
+            return repository.save(existing);
+        });
     }
 
     public boolean deleteEtudiant(Long id) {
-        return repository.deleteById(id);
+        if (!repository.existsById(id)) {
+            return false;
+        }
+        repository.deleteById(id);
+        return true;
     }
 }

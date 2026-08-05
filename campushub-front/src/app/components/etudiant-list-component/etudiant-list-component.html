@@ -1,10 +1,11 @@
 <div class="container">
-    <h2>Liste des étudiants</h2>
-
-        @for (etudiant of etudiants; track etudiant.id) {
-           <app-etudiant-card-component [etudiant]="etudiant"></app-etudiant-card-component>
-        }
-
-  
+  @if (loading()) {
+    <p>Chargement...</p>
+  } @else if (erreur()) {
+    <p class="erreur">{{ erreur() }}</p>
+  } @else {
+    @for (etudiant of etudiants; track etudiant.id) {
+      <app-etudiant-card-component [etudiant]="etudiant" />
+    }
 </div>
 

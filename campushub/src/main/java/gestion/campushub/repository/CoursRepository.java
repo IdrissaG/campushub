@@ -1,38 +1,15 @@
 package gestion.campushub.repository;
 
 import gestion.campushub.model.Cours;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class CoursRepository {
+public interface CoursRepository extends JpaRepository<Cours,Long> {
 
-    private final Map<String, Cours> stockageCours = new ConcurrentHashMap<>();
+    Optional<Cours> findByCode(String code);
 
-    public List<Cours> findAll() {
-        return new ArrayList<>(stockageCours.values());
-    }
-
-    public Optional<Cours> findByCode(String code) {
-        return Optional.ofNullable(stockageCours.get(code));
-    }
-
-    public Cours save(Cours cours) {
-        stockageCours.put(cours.code(), cours);
-        return cours;
-    }
-
-    public boolean deleteByCode(String code) {
-        return stockageCours.remove(code) != null;
-    }
-
-    //
-    public boolean existsByCode(String code) {
-        return stockageCours.containsKey(code);
-    }
+    boolean existsByCode(String code);
 }

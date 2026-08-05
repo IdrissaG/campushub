@@ -1,1 +1,62 @@
-<p>etudiant-form-component works!</p>
+<form [formGroup]="etudiantForm" (ngSubmit)="onSubmit()">
+
+  <!-- NOM -->
+  <div>
+    <label>Nom</label>
+    <input type="text" formControlName="nom" />
+    @if (etudiantForm.get('nom')?.invalid && etudiantForm.get('nom')?.touched) {
+      <span>Le nom est obligatoire</span>
+    }
+  </div>
+
+  <!-- PRENOM -->
+  <div>
+    <label>Prénom</label>
+    <input type="text" formControlName="prenom" />
+    @if (etudiantForm.get('prenom')?.invalid && etudiantForm.get('prenom')?.touched) {
+      <span>Le prénom est obligatoire</span>
+    }
+  </div>
+
+  <!-- EMAIL -->
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+    @if (etudiantForm.get('email')?.errors?.['required'] && etudiantForm.get('email')?.touched) {
+      <span>L'email est obligatoire</span>
+    }
+    @if (etudiantForm.get('email')?.errors?.['email'] && etudiantForm.get('email')?.touched) {
+      <span>Le format de l'email est invalide</span>
+    }
+  </div>
+
+  <!-- AGE -->
+  <div>
+    <label>Âge</label>
+    <input type="number" formControlName="age" />
+    @if (etudiantForm.get('age')?.errors?.['required'] && etudiantForm.get('age')?.touched) {
+      <span>L'âge est obligatoire</span>
+    }
+    @if (etudiantForm.get('age')?.errors?.['min'] && etudiantForm.get('age')?.touched) {
+      <span>L'âge minimum est 15 ans</span>
+    }
+  </div>
+
+  <!-- FILIERE -->
+  <div>
+    <label>Filière</label>
+    <input type="text" formControlName="filiere" />
+  </div>
+
+  <!-- Le bouton est désactivé tant que le formulaire est invalide -->
+  <button type="submit" [disabled]="etudiantForm.invalid">
+    Créer l'étudiant
+  </button>
+  @if (erreurServeur().length > 0) {
+    <div class="erreurs">
+      @for (erreur of erreurServeur(); track erreur) {
+        <p>{{ erreur }}</p>
+      }
+    </div>
+  }
+</form>
