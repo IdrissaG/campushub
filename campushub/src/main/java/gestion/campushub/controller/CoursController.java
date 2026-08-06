@@ -20,6 +20,7 @@ import static gestion.campushub.mapper.CoursMapper.toRequest;
 
 @RestController
 @RequestMapping("/api/cours")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CoursController {
     private final CoursService coursService;
 
