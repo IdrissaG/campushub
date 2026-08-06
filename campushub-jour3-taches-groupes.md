@@ -317,7 +317,7 @@ ngOnInit() {
   });
 }
 ```
-
++
 3. **Vérifier que `provideHttpClient()`** est bien configuré dans `app.config.ts` :
 ```typescript
 export const appConfig: ApplicationConfig = {

@@ -1,12 +1,41 @@
-@if (etudiant(); as e) {
-  <div class="container">
-    <h2>{{ e.prenom }} {{ e.nom }}</h2>
-    <p><strong>Email :</strong> {{ e.email }}</p>
-    <p><strong>Âge :</strong> {{ e.age }}</p>
-    <p><strong>Filière :</strong> {{ e.filiere }}</p>
-  </div>
-} @else if (erreur()) {
-  <p class="erreur">{{ erreur() }}</p>
-} @else {
-  <p>Chargement...</p>
-}
+<div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+  @if (etudiant(); as e) {
+    <h2 class="text-xl font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100">Détails de l'étudiant</h2>
+
+    <div class="space-y-3 text-sm">
+      <div class="flex justify-between">
+        <span class="text-slate-500">Nom :</span>
+        <span class="font-medium text-slate-800">{{ e.nom }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-500">Prénom :</span>
+        <span class="font-medium text-slate-800">{{ e.prenom }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-500">Âge :</span>
+        <span class="font-medium text-slate-800">{{ e.age }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-500">Filière :</span>
+        <span class="font-medium text-slate-800">{{ e.filiere }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-slate-500">Email :</span>
+        <span class="font-medium text-slate-800">{{ e.email }}</span>
+      </div>
+    </div>
+
+  } @else if (erreur()) {
+    <div class="text-red-500 text-center py-4 font-medium">{{ erreur() }}</div>
+
+  } @else {
+    <!-- Skeleton loader simple -->
+    <div class="animate-pulse space-y-4">
+      <div class="h-6 bg-slate-200 rounded w-1/2 mb-6"></div>
+      <div class="h-4 bg-slate-200 rounded w-full"></div>
+      <div class="h-4 bg-slate-200 rounded w-4/5"></div>
+      <div class="h-4 bg-slate-200 rounded w-3/5"></div>
+      <div class="h-4 bg-slate-200 rounded w-full"></div>
+    </div>
+  }
+</div>
