@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class CoursController {
     @Operation(summary = "Créer un cours")
     @ApiResponse(responseCode = "201", description = "Cours créé")
     @ApiResponse(responseCode = "400", description = "Données invalides")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CoursResponse> sauvegarderCours(@Valid @RequestBody CoursRequest monNouveauCours){
         CoursResponse coursResponse = coursService.createCours(monNouveauCours);
@@ -57,6 +59,7 @@ public class CoursController {
     @ApiResponse(responseCode = "400", description = "Données invalides")
     @ApiResponse(responseCode = "404", description = "Cours introuvable")
     @PutMapping("/{code}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CoursResponse> modifierCours(@PathVariable String code, @Valid @RequestBody CoursRequest coursRequest){
         return coursService.updateCours(code, coursRequest).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
@@ -64,6 +67,7 @@ public class CoursController {
     @Operation(summary = "Supprimer un cours")
     @ApiResponse(responseCode = "204", description = "Cours supprimé")
     @ApiResponse(responseCode = "404", description = "Cours introuvable")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{code}")
     public ResponseEntity<Void> supprimerCours(@PathVariable String code){
         boolean supprime = coursService.deleteCours(code);

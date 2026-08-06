@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -60,6 +61,7 @@ public class EtudiantController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Créer un nouvel étudiant")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Étudiant créé"),
@@ -73,6 +75,7 @@ public class EtudiantController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Modifier un étudiant")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Étudiant modifié"),
@@ -89,6 +92,7 @@ public class EtudiantController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Supprimer un étudiant")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Étudiant supprimé"),

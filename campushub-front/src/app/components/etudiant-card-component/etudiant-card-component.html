@@ -1,10 +1,11 @@
-<div class="card">  
-  <h3>Nom: {{ etudiant().nom }}</h3>
-  <h3>Prenom: {{ etudiant().prenom }}</h3>
-  <h3>Age: {{ etudiant().age }}</h3>
-  <p>Filiere: {{ etudiant().filiere }}</p>
-  <p>Email : {{ etudiant().email }}</p>
+<div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+  <div class="font-semibold text-slate-800 text-base mb-2">
+    {{ etudiant().prenom }} {{ etudiant().nom }}
+  </div>
 
-  
+  <div class="text-sm text-slate-600 space-y-1">
+    <div>Âge : {{ etudiant().age }}</div>
+    <div>Filière : {{ etudiant().filiere }}</div>
+    <div>Email : {{ etudiant().email }}</div>
+  </div>
 </div>
-
