@@ -2,20 +2,19 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Etudiant } from '../../model/etudiant.interface';
 import { EtudiantCardComponent } from '../etudiant-card-component/etudiant-card-component';
 import { EtudiantService } from '../../services/etudiant-service';
-import { PageResponse } from '../../model/page-response.model';
 
 @Component({
   selector: 'app-etudiant-list-component',
   standalone: true,
   imports: [EtudiantCardComponent],
-  
+
   templateUrl: './etudiant-list-component.html',
   styleUrl: './etudiant-list-component.scss',
 })
 
 export class EtudiantListComponent implements OnInit {
 
-  etudiants: Etudiant[] = [];
+  etudiants = signal<Etudiant[]>([]);
 
   private etudiantService = inject(EtudiantService);
 
@@ -25,7 +24,7 @@ export class EtudiantListComponent implements OnInit {
   ngOnInit() {
     this.etudiantService.getAll().subscribe({
       next: (data) => {
-        this.etudiants = data.content;
+        this.etudiants.set(data.content);
         this.loading.set(false);
       },
       error: (err) => {
@@ -34,5 +33,15 @@ export class EtudiantListComponent implements OnInit {
       }
     });
   }
-}
 
+  onSupprimer(id: number) {
+    this.etudiantService.delete(id).subscribe({
+      next: () => {
+        this.etudiants.set(this.etudiants().filter(etudiant => etudiant.id !== id));
+      },
+      error: () => {
+        this.erreur.set('Impossible de supprimer l\'étudiant');
+      }
+    });
+  }
+}
