@@ -16,10 +16,12 @@
     <div class="bg-red-50 text-red-600 p-4 rounded-xl border border-red-200 text-center font-medium">
       {{ erreur() }}
     </div>
+  } @else if (etudiants().length === 0) {
+      <p>Aucun étudiant trouvé.</p>
   } @else {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      @for (etudiant of etudiants; track etudiant.id) {
-        <app-etudiant-card-component [etudiant]="etudiant" />
+      @for (etudiant of etudiants(); track etudiant.id) {
+        <app-etudiant-card-component [etudiant]="etudiant" (supprimer)="onSupprimer($event)" />
       }
     </div>
   }

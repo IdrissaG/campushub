@@ -8,4 +8,5 @@
     <div>Filière : {{ etudiant().filiere }}</div>
     <div>Email : {{ etudiant().email }}</div>
   </div>
+  <button (click)="supprimer.emit(etudiant().id)">Supprimer</button>
 </div>

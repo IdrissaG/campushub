@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Etudiant } from '../../model/etudiant.interface';
 
 
@@ -11,5 +11,6 @@ import { Etudiant } from '../../model/etudiant.interface';
 })
 export class EtudiantCardComponent {
   etudiant = input.required<Etudiant>();
+  supprimer = output<number>();
 }
 // card attend obligatoirement un étudiant venant de l'extérieur.

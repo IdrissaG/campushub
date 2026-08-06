@@ -22,5 +22,9 @@ export class EtudiantService {
   getAll(page: number = 0, size: number = 10): Observable<PageResponse<Etudiant>> {
     return this.http.get<PageResponse<Etudiant>>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
 
