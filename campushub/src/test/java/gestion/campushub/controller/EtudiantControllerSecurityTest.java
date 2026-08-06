@@ -54,7 +54,7 @@ class EtudiantControllerSecurityTest {
     @Test
     void testCreateAvecTokenEtudiant_retourne403() throws Exception {
         Utilisateur etudiant = utilisateurRepository.save(
-            new Utilisateur("etudiant.test@example.com", passwordEncoder.encode("password"), Role.ETUDIANT, "Etudiant Test")
+            new Utilisateur("etudiant.test@example.com", passwordEncoder.encode("password"), Role.ETUDIANT)
         );
         String token = jwtService.generateToken(etudiant);
 
@@ -68,7 +68,7 @@ class EtudiantControllerSecurityTest {
     @Test
     void testCreateAvecTokenAdmin_retourne201() throws Exception {
         Utilisateur admin = utilisateurRepository.save(
-            new Utilisateur("admin.test@example.com", passwordEncoder.encode("password"), Role.ADMIN, "Admin Test")
+            new Utilisateur("admin.test@example.com", passwordEncoder.encode("password"), Role.ADMIN)
         );
         String token = jwtService.generateToken(admin);
 
