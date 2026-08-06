@@ -43,3 +43,17 @@ En comparant votre entité `Utilisateur.java` avec la table créée en V3, on a 
    private String motDePasse;
 ```
 
+# Journal — Jour 6
+
+## Appris
+- Une migration Flyway doit respecter exactement le schéma SQL existant
+- Les colonnes dans V5 doivent correspondre aux colonnes réelles après V1+V2
+- Le schéma de cours n'a pas de credits ni d'intitule mais code et nom
+
+## Bloqué
+- Le pom.xml avait des doublons JWT (0.12.5 et 0.12.6) qui ont causé des conflits
+- Un camarade a finalement corrigé le problème cote main
+
+## Question
+- Comment eviter que plusieurs personnes modifient le meme fichier pom en parallele ?
+
