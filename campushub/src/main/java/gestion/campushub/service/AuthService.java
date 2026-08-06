@@ -40,7 +40,6 @@ public class AuthService {
                 Role.ETUDIANT
         );
 
-
         Utilisateur savedUser = utilisateurRepository.save(utilisateur);
         String token = jwtService.generateToken(savedUser);
 
@@ -63,4 +62,3 @@ public class AuthService {
         return new AuthResponse(token, utilisateur.getRole().name());
     }
 }
-
