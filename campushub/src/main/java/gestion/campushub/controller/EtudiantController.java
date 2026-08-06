@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/etudiants")
 @Tag(name = "Étudiants", description = "Gestion des étudiants")
-@CrossOrigin(origins = "http://localhost:4200")
 public class EtudiantController {
 
     private final EtudiantsService service;
