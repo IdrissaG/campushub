@@ -37,9 +37,9 @@ public class AuthService {
         Utilisateur utilisateur = new Utilisateur(
                 request.email(),
                 passwordEncoder.encode(request.motDePasse()),
-                Role.ETUDIANT,
-                request.nom()
+                Role.ETUDIANT
         );
+
 
         Utilisateur savedUser = utilisateurRepository.save(utilisateur);
         String token = jwtService.generateToken(savedUser);
