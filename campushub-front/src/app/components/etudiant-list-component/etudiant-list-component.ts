@@ -42,14 +42,9 @@ export class EtudiantListComponent implements OnInit {
   }
 
   onSupprimer(id: number) {
-    this.etudiantService.delete(id).subscribe({
-      next: () => {
-        this.etudiants.set(this.etudiants().filter(etudiant => etudiant.id !== id));
-      },
-      error: () => {
-        this.erreur.set('Impossible de supprimer l\'étudiant');
-      }
-    });
+    if (confirm('Confirmer la suppression ?')) {
+      this.etudiantService.delete(id).subscribe(() => this.chargerEtudiants());
+    }
   }
 
   pagePrecedente() {
