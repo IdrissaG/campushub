@@ -1,12 +1,35 @@
-<div class="max-w-7xl mx-auto">
-  <h1 class="text-2xl font-bold text-slate-800 mb-6">Liste des étudiants</h1>
+<div class="max-w-7xl mx-auto p-4 md:p-6">
+  <!-- En-tête et Contrôles de pagination -->
+  <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+    <h1 class="text-2xl font-bold text-slate-800">Liste des étudiants</h1>
 
+    <!-- Groupe de pagination stylisé -->
+    <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
+      <button
+        (click)="pagePrecedente()"
+        class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+        Précédent
+      </button>
+
+      <span class="text-sm font-semibold text-slate-600 px-2">
+        Page {{ pageActuelle() + 1 }}
+      </span>
+
+      <button
+        (click)="pageSuivante()"
+        class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+        Suivant
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenu -->
   @if (loading()) {
-    <!-- Skeletons en grille pour le chargement -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      @for (i of [1, 2, 3]; track i) {
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm animate-pulse space-y-3">
-          <div class="h-5 bg-slate-200 rounded w-1/2"></div>
+    <!-- Skeletons en grille de 2 colonnes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm animate-pulse space-y-4">
+          <div class="h-6 bg-slate-200 rounded w-1/2"></div>
           <div class="h-4 bg-slate-200 rounded w-full"></div>
           <div class="h-4 bg-slate-200 rounded w-3/4"></div>
         </div>
@@ -17,9 +40,12 @@
       {{ erreur() }}
     </div>
   } @else if (etudiants().length === 0) {
-      <p>Aucun étudiant trouvé.</p>
+    <div class="text-center py-12 bg-white rounded-xl border border-slate-200">
+      <p class="text-slate-500 font-medium">Aucun étudiant trouvé.</p>
+    </div>
   } @else {
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <!-- Grille de 2 colonnes pour des cartes plus grandes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       @for (etudiant of etudiants(); track etudiant.id) {
         <app-etudiant-card-component [etudiant]="etudiant" (supprimer)="onSupprimer($event)" />
       }

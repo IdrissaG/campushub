@@ -1,12 +1,24 @@
-<div class="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
-  <div class="font-semibold text-slate-800 text-base mb-2">
-    {{ etudiant().prenom }} {{ etudiant().nom }}
+<div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow">
+  <div>
+    <!-- Nom et Prénom -->
+    <div class="font-semibold text-slate-800 text-base mb-2">
+      {{ etudiant().prenom }} {{ etudiant().nom }}
+    </div>
+
+    <!-- Informations -->
+    <div class="text-sm text-slate-600 space-y-1.5">
+      <div><span class="font-medium text-slate-700">Âge :</span> {{ etudiant().age }} ans</div>
+      <div><span class="font-medium text-slate-700">Filière :</span> {{ etudiant().filiere }}</div>
+      <div><span class="font-medium text-slate-700">Email :</span> {{ etudiant().email }}</div>
+    </div>
   </div>
 
-  <div class="text-sm text-slate-600 space-y-1">
-    <div>Âge : {{ etudiant().age }}</div>
-    <div>Filière : {{ etudiant().filiere }}</div>
-    <div>Email : {{ etudiant().email }}</div>
+  <!-- Pied de carte avec le bouton Supprimer -->
+  <div class="pt-3 border-t border-slate-100 flex justify-end">
+    <button
+      (click)="supprimer.emit(etudiant().id)"
+      class="px-3 py-1.5 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors border border-red-200 cursor-pointer">
+      Supprimer
+    </button>
   </div>
-  <button (click)="supprimer.emit(etudiant().id)">Supprimer</button>
 </div>

@@ -21,8 +21,15 @@ export class EtudiantListComponent implements OnInit {
   loading = signal(true);
   erreur = signal<string | null>(null);
 
+  pageActuelle = signal(0);
+  taillePage = 4;
+
   ngOnInit() {
-    this.etudiantService.getAll().subscribe({
+    this.chargerEtudiants();
+  }
+
+  chargerEtudiants() {
+    this.etudiantService.getAll(this.pageActuelle(), this.taillePage).subscribe({
       next: (data) => {
         this.etudiants.set(data.content);
         this.loading.set(false);
@@ -43,5 +50,22 @@ export class EtudiantListComponent implements OnInit {
         this.erreur.set('Impossible de supprimer l\'étudiant');
       }
     });
+  }
+
+  pagePrecedente() {
+    if (this.pageActuelle() > 0) {
+      this.pageActuelle.update(p => p - 1);
+      this.chargerEtudiants();
+    }
+  }
+
+  pageSuivante() {
+    this.pageActuelle.update(p => {
+      if(p < (this.etudiants().length / this.taillePage)) {
+        return p + 1;
+      }
+      return p;
+    });
+    this.chargerEtudiants();
   }
 }
