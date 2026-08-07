@@ -25,6 +25,10 @@ public class Inscription {
 
     private Double note;
     private LocalDate dateInscription;
+
+
+
+
     protected Inscription() {}
 
     public Inscription(Etudiant etudiant, Cours cours, Double note, LocalDate dateInscription) {
