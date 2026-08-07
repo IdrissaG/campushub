@@ -26,6 +26,4 @@ public class Cours{
         this.code = code;
         this.nom = nom;
     }
-
-
 }
