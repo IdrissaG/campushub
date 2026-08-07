@@ -5,16 +5,19 @@ import { EtudiantDetailComponent } from './components/etudiant-detail-component/
 import { NotFoundComponent } from './components/not-found-component/not-found-component';
 
 export const routes: Routes = [
-  //Redirection vers la liste des étudiants par défaut
+  // Redirection par défaut vers /etudiants
   { path: '', redirectTo: 'etudiants', pathMatch: 'full' },
-  //Route 1 : Liste des étudiants
+  
+
+  // Route 1 : Liste
   { path: 'etudiants', component: EtudiantListComponent },
-  //Route 2 : Fiche détaillée d'un étudiant(informations personnelles, filière, etc.)
-  { path: 'etudiants/:id', component: EtudiantDetailComponent },
-  //Route 3 : Formulaire de modification
-  { path: 'etudiants/:id/modifier', component: EtudiantFormComponent },
-  //Route 4 : Formulaire de création
+
+  // Route 2 : Formulaire de création 
   { path: 'etudiants/nouveau', component: EtudiantFormComponent },
-  //Route 5 : Page 404
+
+  // Route 3 : Fiche détaillée d'un étudiant
+  { path: 'etudiants/:id', component: EtudiantDetailComponent },
+
+  // Route 4 : Page 404 
   { path: '**', component: NotFoundComponent },
 ];
