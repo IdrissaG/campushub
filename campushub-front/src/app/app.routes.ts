@@ -7,10 +7,8 @@ import { NotFoundComponent } from './components/not-found-component/not-found-co
 export const routes: Routes = [
   { path: '', redirectTo: 'etudiants', pathMatch: 'full' },
   { path: 'etudiants', component: EtudiantListComponent },
-  { path: 'etudiants/nouveau', component: EtudiantFormComponent },
+  { path: 'etudiants/nouveau', component: EtudiantFormComponent }, 
   { path: 'etudiants/:id/modifier', component: EtudiantFormComponent },
   { path: 'etudiants/:id', component: EtudiantDetailComponent },
-
-  
   { path: '**', component: NotFoundComponent },
 ];
