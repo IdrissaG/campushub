@@ -41,16 +41,19 @@ export class EtudiantListComponent implements OnInit {
     });
   }
 
-  onSupprimer(id: number) {
+  // onSupprimer(id: number) {
+  //   if (confirm('Confirmer la suppression ?')) {
+  //     this.etudiantService.delete(id).subscribe(() => this.chargerEtudiants());
+  //   }
+  // }
+onSupprimer(id: number) {
+  if (confirm('Confirmer la suppression ?')) {
     this.etudiantService.delete(id).subscribe({
-      next: () => {
-        this.etudiants.set(this.etudiants().filter(etudiant => etudiant.id !== id));
-      },
-      error: () => {
-        this.erreur.set('Impossible de supprimer l\'étudiant');
-      }
+      next: () => this.chargerEtudiants(),
+      error: () => this.erreur.set('Impossible de supprimer l\'étudiant') // ← ajouté
     });
   }
+}
 
   pagePrecedente() {
     if (this.pageActuelle() > 0) {

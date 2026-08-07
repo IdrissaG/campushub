@@ -49,9 +49,12 @@
   </div>
 
   <!-- Le bouton est désactivé tant que le formulaire est invalide -->
-  <button type="submit" [disabled]="etudiantForm.invalid">
+  <!-- <button type="submit" [disabled]="etudiantForm.invalid">
     Créer l'étudiant
-  </button>
+  </button> -->
+<button type="submit" [disabled]="etudiantForm.invalid">
+  {{ etudiantId ? 'Modifier l\'étudiant' : 'Créer l\'étudiant' }} <!-- ← modifié -->
+</button>
   @if (erreurServeur().length > 0) {
     <div class="erreurs">
       @for (erreur of erreurServeur(); track erreur) {
