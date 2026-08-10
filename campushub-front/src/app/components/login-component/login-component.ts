@@ -46,7 +46,7 @@ export class LoginComponent {
   });
 
   erreur = signal<string | null>(null);
-
+  
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
