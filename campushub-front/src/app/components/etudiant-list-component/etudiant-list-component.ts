@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Etudiant } from '../../model/etudiant.interface';
 import { EtudiantCardComponent } from '../etudiant-card-component/etudiant-card-component';
 import { EtudiantService } from '../../services/etudiant-service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-etudiant-list-component',
@@ -17,6 +18,7 @@ export class EtudiantListComponent implements OnInit {
   etudiants = signal<Etudiant[]>([]);
 
   private etudiantService = inject(EtudiantService);
+  authService = inject(AuthService);
 
   loading = signal(true);
   erreur = signal<string | null>(null);
