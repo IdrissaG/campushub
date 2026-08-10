@@ -2,8 +2,6 @@
 
 **Contexte du jour :** authentification côté Angular — le jour le plus dense de la semaine 2. Un visiteur non connecté ne doit plus pouvoir voir les formulaires ni écrire ; un ADMIN doit pouvoir tout faire.
 
-⚠️ **G8 absent pour la 2e journée consécutive** — voir la note de vigilance en bas de document, le pipeline CI n'est toujours pas surveillé activement.
-
 ---
 
 ## 🔵 G1 – Fondations & Modèle de données
@@ -301,18 +299,6 @@ resultats$ = this.rechercheControl.valueChanges.pipe(
 - Token visible dans les DevTools, rôle de l'intercepteur explicable clairement.
 - PR mergée.
 
----
-
-## ⚫ G8 – DevOps & Cloud
-
-**Absent pour la 2e journée consécutive.**
-
-**Impact à surveiller de près :**
-- Le pipeline CI n'a pas été vérifié depuis 2 jours — G1 a pris le relais aujourd'hui pour une vérification manuelle (voir sa section).
-- Les changements importants de G6/G7 aujourd'hui (intercepteur, guards, nouvelles dépendances RxJS si le bonus recherche est fait) doivent être buildables en CI — **à vérifier en priorité dès le retour de G8**, sans quoi le risque de régression silencieuse augmente.
-- Le volet cloud (stratégie d'hébergement frontend, gestion des secrets) reste en pause depuis 2 jours — sans impact bloquant immédiat, mais à rattraper avant le jour 9 (Docker) qui dépend de ces décisions.
-
-**Recommandation pour la suite :** si l'absence de G8 devait se prolonger jusqu'au jour 9, il faudra redistribuer une partie de sa charge (Dockerfiles, docker-compose) entre les groupes backend et frontend pour ne pas mettre en péril le livrable du jour 9 — à anticiper dès maintenant avec le formateur.
 
 ---
 
@@ -320,7 +306,7 @@ resultats$ = this.rechercheControl.valueChanges.pipe(
 
 - G7 dépend du contrat JWT de G5 → suivi prioritaire toute la journée.
 - G6 dépend de `AuthService` de G7 pour son affichage conditionnel → coordination directe nécessaire dès le matin.
-- Sans G8, personne ne valide que les nouveaux packages/dépendances Angular d'aujourd'hui ne cassent pas le build CI — vérification manuelle recommandée en fin de journée par un relecteur croisé.
+
 
 ## 📌 Rappel à tous
 
