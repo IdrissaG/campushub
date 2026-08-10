@@ -10,27 +10,10 @@ import { LoginRequest } from '../../model/auth.interface';
   imports: [ReactiveFormsModule],
   template: `
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-      <input
-        formControlName="email"
-        type="email"
-        placeholder="Email"
-      />
-
-      <input
-        formControlName="motDePasse"
-        type="password"
-        placeholder="Mot de passe"
-      />
-
-      <button type="submit">
-        Se connecter
-      </button>
-
-      @if (erreur()) {
-        <p class="erreur">{{ erreur() }}</p>
-      }
-
+      <input formControlName="email" placeholder="Email" />
+      <input formControlName="motDePasse" type="password" placeholder="Mot de passe" />
+      <button type="submit">Se connecter</button>
+      @if (erreur()) { <p class="erreur">{{ erreur() }}</p> }
     </form>
   `
 })
