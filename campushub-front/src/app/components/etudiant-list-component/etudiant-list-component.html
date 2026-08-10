@@ -47,7 +47,10 @@
     <!-- Grille de 2 colonnes pour des cartes plus grandes -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       @for (etudiant of etudiants(); track etudiant.id) {
-        <app-etudiant-card-component [etudiant]="etudiant" (supprimer)="onSupprimer($event)" />
+        <app-etudiant-card-component
+          [etudiant]="etudiant"
+          [peutModifier]="authService.estAdmin()"
+          (supprimer)="onSupprimer($event)" />
       }
     </div>
   }
