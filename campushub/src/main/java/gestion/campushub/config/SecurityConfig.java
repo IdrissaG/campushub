@@ -52,9 +52,6 @@ public class SecurityConfig {
                                 "/error"
                         ).permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/etudiants/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/etudiants/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/etudiants/**").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/etudiants/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/cours/**").permitAll()
                         .anyRequest().authenticated()
                 )
