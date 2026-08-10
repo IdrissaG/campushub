@@ -81,4 +81,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.....
 Le rôle est renvoyé dans `AuthResponse.role` et détermine les endpoints accessibles côté frontend (guards Angular, Jour 8).
 
 > ⚠️ Note pour G7 : ces endpoints renvoient actuellement `501 Not Implemented` (implémentation fonctionnelle prévue plus tard). Ce contrat décrit le format attendu une fois l'implémentation terminée — utile dès maintenant pour préparer les services Angular et les guards sans attendre l'implémentation réelle.
- 
+
+## Détails techniques du token (pour l'implémentation Angular, Jour 8)
+
+- **Claim du rôle** : `role` (valeurs possibles : `"ADMIN"`, `"ETUDIANT"`)
+- **Durée de validité** : 24 heures
+- **Token expiré ou invalide** : la requête est traitée comme non authentifiée → `403 Forbidden` (pas 401) sur les routes protégées. Le frontend doit gérer le `403` (pas seulement le `401`) pour détecter une session expirée et rediriger vers `/login`.
