@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { LoginRequest } from '../../model/auth.interface';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,7 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  loginForm = this.fb.group({
+  loginForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     motDePasse: ['', Validators.required],
   });
@@ -47,12 +48,13 @@ export class LoginComponent {
   erreur = signal<string | null>(null);
 
   onSubmit() {
-
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.authService.login(this.loginForm.value).subscribe({
+    const credentials: LoginRequest = this.loginForm.getRawValue();
+
+    this.authService.login(credentials).subscribe({
       next: () => {
         this.router.navigate(['/etudiants']);
       },

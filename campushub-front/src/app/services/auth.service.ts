@@ -11,11 +11,11 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  // Signals initialisés depuis localStorage — survivent au rechargement de page
+  // Signals initialisés depuis localStorage, survivent au rechargement de page
   private tokenSignal = signal<string | null>(localStorage.getItem('token'));
   private roleSignal  = signal<string | null>(localStorage.getItem('role'));
 
-  // Dérivés automatiquement — se mettent à jour quand token/role changent
+  // Dérivés automatiquement, se mettent à jour quand token/role changent
   estConnecte = computed(() => this.tokenSignal() !== null);
   estAdmin    = computed(() => this.roleSignal() === 'ADMIN');
 
@@ -50,3 +50,5 @@ export class AuthService {
     this.roleSignal.set(response.role);
   }
 }
+
+
