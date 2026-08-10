@@ -3,12 +3,22 @@ import { EtudiantListComponent } from './components/etudiant-list-component/etud
 import { EtudiantFormComponent } from './components/etudiant-form-component/etudiant-form-component';
 import { EtudiantDetailComponent } from './components/etudiant-detail-component/etudiant-detail-component';
 import { NotFoundComponent } from './components/not-found-component/not-found-component';
+import { authGuard } from './guards/auth.guard';
+import { LoginComponent } from './components/login-component/login-component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'etudiants', pathMatch: 'full' },
+
   { path: 'etudiants', component: EtudiantListComponent },
-  { path: 'etudiants/nouveau', component: EtudiantFormComponent }, 
-  { path: 'etudiants/:id/modifier', component: EtudiantFormComponent },
+
+  { path: 'etudiants/nouveau', component: EtudiantFormComponent, canActivate: [authGuard] },
+
+  { path: 'etudiants/:id/modifier', component: EtudiantFormComponent, canActivate: [authGuard] },
+
   { path: 'etudiants/:id', component: EtudiantDetailComponent },
-  { path: '**', component: NotFoundComponent },
+  
+  { path: 'login', component: LoginComponent},
+
+  { path: '**', component: NotFoundComponent }
+
 ];
