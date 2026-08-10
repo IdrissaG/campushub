@@ -5,11 +5,12 @@ import { Etudiant } from '../../model/etudiant.interface';
 @Component({
   selector: 'app-etudiant-card-component',
   standalone: true,
-  imports: [RouterLink], 
+  imports: [RouterLink],
   templateUrl: './etudiant-card-component.html',
   styleUrl: './etudiant-card-component.scss',
 })
 export class EtudiantCardComponent {
   etudiant = input.required<Etudiant>();
+  peutModifier = input<boolean>(false);
   supprimer = output<number>();
 }
