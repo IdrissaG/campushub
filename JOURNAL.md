@@ -57,3 +57,7 @@ En comparant votre entité `Utilisateur.java` avec la table créée en V3, on a 
 ## Question
 - Comment eviter que plusieurs personnes modifient le meme fichier pom en parallele ?
 
+### Jour 8 - G4
+- Comptes de test ADMIN/ETUDIANT introuvables en base ce matin (aucune migration ne les créait).
+- Recréés manuellement via `/api/auth/register` + `UPDATE role='ADMIN'` en SQL pour débloquer les tests de G7.
+- Solution temporaire, valable uniquement en local : recommandation d'ajouter une vraie migration versionnée (ex: V7) si besoin que ce soit reproductible pour toute l'équipe.
