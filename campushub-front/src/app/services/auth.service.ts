@@ -14,12 +14,12 @@ export class AuthService {
   // Signals initialisés depuis localStorage, survivent au rechargement de page
 //   private tokenSignal = signal<string | null>(localStorage.getItem('token'));
 //   private roleSignal  = signal<string | null>(localStorage.getItem('role'));
-private tokenSignal = signal<string | null>(
-  typeof window !== 'undefined' ? localStorage.getItem('token') : null // SSR-safe : localStorage n'existe pas côté serveur, donc on vérifie qu'on est dans le navigateur avant d'y accéder
-);
-private roleSignal = signal<string | null>(
-  typeof window !== 'undefined' ? localStorage.getItem('role') : null // SSR-safe : localStorage n'existe pas côté serveur, donc on vérifie qu'on est dans le navigateur avant d'y accéder
-);
+  private tokenSignal = signal<string | null>(
+    typeof window !== 'undefined' ? localStorage.getItem('token') : null // SSR-safe : localStorage n'existe pas côté serveur, donc on vérifie qu'on est dans le navigateur avant d'y accéder
+  );
+  private roleSignal = signal<string | null>(
+    typeof window !== 'undefined' ? localStorage.getItem('role') : null // SSR-safe : localStorage n'existe pas côté serveur, donc on vérifie qu'on est dans le navigateur avant d'y accéder
+  );
 
   // Dérivés automatiquement, se mettent à jour quand token/role changent
   estConnecte = computed(() => this.tokenSignal() !== null);
