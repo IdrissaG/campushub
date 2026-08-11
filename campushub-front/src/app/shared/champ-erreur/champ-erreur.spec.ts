@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChampErreur } from './champ-erreur';
+import { ChampErreurComponent } from './champ-erreur';
 
-describe('ChampErreur', () => {
-  let component: ChampErreur;
-  let fixture: ComponentFixture<ChampErreur>;
+describe('ChampErreurComponent', () => {
+  let component: ChampErreurComponent;
+  let fixture: ComponentFixture<ChampErreurComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ChampErreur],
+      imports: [ChampErreurComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChampErreur);
+    fixture = TestBed.createComponent(ChampErreurComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
