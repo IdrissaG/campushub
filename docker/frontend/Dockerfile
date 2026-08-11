@@ -9,5 +9,5 @@ RUN npm run build
 # Étape 2 : image Nginx légère
 FROM nginx:alpine
 COPY --from=build /app/dist/campushub-front/browser /usr/share/nginx/html
-COPY docker/front/nginx.conf /etc/nginx/conf.d/default.conf
+COPY docker/frontend/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
