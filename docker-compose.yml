@@ -1,6 +1,8 @@
 ﻿services:
+
   postgres:
     image: postgres:16
+    container_name: campushub-postgres
     environment:
       POSTGRES_DB: campushub
       POSTGRES_USER: campushub
@@ -9,5 +11,42 @@
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campushub"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: campushub-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/campushub
+      SPRING_DATASOURCE_USERNAME: campushub
+      SPRING_DATASOURCE_PASSWORD: campushub
+      JWT_SECRET: ${JWT_SECRET:-changez-moi-en-production-secret-256-bits}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    container_name: campushub-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
 volumes:
   pgdata:
