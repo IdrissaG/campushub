@@ -21,7 +21,7 @@ describe('EtudiantService', () => {
   });
 
   it('devrait créer un étudiant via POST', () => {
-    const nouvelEtudiant = { nom: 'Diop', prenom: 'Awa', email: 'awa@test.com', age: 22 };
+    const nouvelEtudiant = { nom: 'Diop', prenom: 'Awa', email: 'awa@test.com', age: 22, filiere: 'Informatique' };
     service.create(nouvelEtudiant).subscribe();
 
     const req = httpMock.expectOne('http://localhost:8080/api/etudiants');
