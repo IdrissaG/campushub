@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://railway.com/api'
+  apiUrl: 'https://campushub-web.onrender.com/api'
 };
