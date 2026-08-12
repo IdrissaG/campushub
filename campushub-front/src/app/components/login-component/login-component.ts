@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '../../model/auth.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -79,14 +80,18 @@ export class LoginComponent {
       return;
     }
 
+    this.erreur.set(null);
     const credentials: LoginRequest = this.loginForm.getRawValue();
 
     this.authService.login(credentials).subscribe({
       next: () => {
         this.router.navigate(['/etudiants']);
       },
-      error: () => {
-        this.erreur.set('Identifiants invalides');
+      error: (err: HttpErrorResponse) => {
+        const message = err.error?.erreurs?.[0]
+          ?? err.error?.message
+          ?? 'Email ou mot de passe incorrect.';
+        this.erreur.set(message);
       }
     });
   }
