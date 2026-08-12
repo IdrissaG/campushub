@@ -61,3 +61,16 @@ En comparant votre entité `Utilisateur.java` avec la table créée en V3, on a 
 - Comptes de test ADMIN/ETUDIANT introuvables en base ce matin (aucune migration ne les créait).
 - Recréés manuellement via `/api/auth/register` + `UPDATE role='ADMIN'` en SQL pour débloquer les tests de G7.
 - Solution temporaire, valable uniquement en local : recommandation d'ajouter une vraie migration versionnée (ex: V7) si besoin que ce soit reproductible pour toute l'équipe.
+
+
+
+### Jour 9 - G4
+
+## Appris
+- Le healthcheck depends_on condition: service_healthy garantit que le backend attend vraiment que PostgreSQL soit prêt avant de démarrer, pas juste que le conteneur soit lancé
+- docker compose up --build reconstruit les images depuis zéro et évite les comportements inattendus dus aux caches
+- docker system prune nettoie les images et volumes orphelins avant un test propre
+- Le nginx.conf doit avoir try_files pour que le routing Angular (SPA) fonctionne correctement côté frontend
+
+
+
