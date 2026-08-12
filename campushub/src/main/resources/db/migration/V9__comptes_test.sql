@@ -3,7 +3,7 @@
 INSERT INTO utilisateur (email, mot_de_passe_hash, role, nom)
 VALUES (
     'admin@campushub.sn',
-    '$2a$10$wT/p7HqM8882iV.O08XUuubS9C6h56A4qF9e1z5bXyG2W8hH8lOda',
+    '$2a$10$HwmEb4qmw9Ys0Vh6B9NL2.KUt/YB9vybmofd0lDjPCKrIUXsP71cy',
     'ADMIN',
     'Administrateur System'
 )
@@ -14,7 +14,7 @@ ON CONFLICT (email) DO NOTHING;
 INSERT INTO utilisateur (email, mot_de_passe_hash, role, nom)
 VALUES (
     'etudiant@campushub.sn',
-    '$2a$10$E291eI4q3.N.m0m4R7W/A.f8Yp9L0p0jO.L.x1z2A3B4C5D6E7F8G',
+    '$2a$10$VCaKF1ta7EaE.zIk7uqWeuCmPMcdSgir9BYTDZrhebcN3dEecUdN6',
     'ETUDIANT',
     'Etudiant Test'
 )
