@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '../../model/auth.interface';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   template: `
     <div class="max-w-md mx-auto mt-12 bg-white p-8 rounded-xl shadow-sm border border-slate-200">
       <h2 class="text-xl font-bold text-slate-800 mb-6 text-center">Connexion</h2>
@@ -54,6 +54,10 @@ import { LoginRequest } from '../../model/auth.interface';
           </div>
         }
       </form>
+      <p class="text-center text-sm text-slate-500 mt-4">
+        Pas encore de compte ?
+        <a routerLink="/register" class="text-indigo-600 font-medium hover:underline">S'inscrire</a>
+      </p>
     </div>
   `
 })

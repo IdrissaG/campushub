@@ -42,6 +42,14 @@ export class AuthService {
     this.router.navigate(['/etudiants']);
   }
 
+  register(data: RegisterRequest): Observable<AuthResponse> {
+  return this.http
+    .post<AuthResponse>('http://localhost:8080/api/auth/register', data)
+    .pipe(
+      tap(response => this.stockerSession(response))
+    );
+}
+
   // Appelé par l'intercepteur pour récupérer le token à injecter dans les requêtes
   getToken(): string | null {
     return this.tokenSignal();
@@ -55,13 +63,7 @@ export class AuthService {
     this.roleSignal.set(response.role);
   }
 
-  register(data: RegisterRequest): Observable<AuthResponse> {
-    return this.http
-      .post<AuthResponse>('http://localhost:8080/api/auth/register', data)
-      .pipe(
-        tap(response => this.stockerSession(response))
-      );
-  }
+
 }
 
 
