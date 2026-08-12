@@ -58,7 +58,7 @@ export class AuthService {
   private stockerSession(response: AuthResponse): void {
     localStorage.setItem('token', response.token);
     localStorage.setItem('role', response.role);
-    // Met à jour les signals — tout ce qui en dépend se rafraîchit automatiquement
+    // Met à jour les signals: tout ce qui en dépend se rafraîchit automatiquement
     this.tokenSignal.set(response.token);
     this.roleSignal.set(response.role);
   }
