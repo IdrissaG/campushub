@@ -74,3 +74,32 @@ En comparant votre entité `Utilisateur.java` avec la table créée en V3, on a 
 
 
 
+## Bilan du groupe G6 (Frontend Core)
+
+### Ce que nous avons appris sur les 2 semaines
+
+- **Collaboration et synergie d'équipe :** Expérimenter la réalité du travail en équipe à grande échelle (8 groupes interdépendants), où la réussite collective prime sur la performance individuelle. Nous avons compris l'importance de l'écoute, de la synchronisation et de la co-construction pour faire avancer un projet.
+  
+- **Maîtrise d'Angular moderne :** Implication approfondie sur l'architecture standalone, l'utilisation des signaux (`signal`, `input`, `output`) et les nouvelles structures de contrôle (`@if`, `@for`).
+  
+- **Gestion d'état et des flux asynchrones :** Connexion robuste d'une interface réactive aux API REST (via `HttpClient`), gestion fine des 3 états (chargement, erreur, succès) et mise en place d'une pagination synchrone avec le backend.
+  
+- **Sécurité et rôles front-end :** Implémentation d'une adaptation dynamique de l'interface selon le profil utilisateur (visiteur, étudiant, administrateur) en s'appuyant sur un service d'authentification centralisé.
+  
+- **Containerisation et Déploiement :** Conception d'un Dockerfile multi-stage optimisé pour une application Angular et configuration d'un serveur Nginx pour la gestion du routing côté client (SPA).
+  
+
+### Ce qui a bien fonctionné dans la collaboration à 8 groupes
+
+- **Complémentarité inter-équipes :** Une excellente synergie avec les autres groupes (intégration fluide avec l'API de G2, utilisation du service d'auth de G7, intégration du Dockerfile par G4 et revues de cohérence croisées avec G1).
+  
+- **Communication et alignement :** Le respect des contrats d'interfaces et des rôles de chacun a permis d'avancer de manière incrémentale et sans blocage majeur.
+  
+
+### Ce qui pourrait être amélioré pour une prochaine session
+
+- **Gestion des imprévus et des groupes inactifs :** Prévoir une stratégie ou un plan de secours clair (réassignation rapide des tâches) en cas d'indisponibilité d'un groupe pour éviter l'accumulation de travail en fin de parcours.
+  
+- **Gouvernance des fichiers transverses et sensibles :** Établir une règle stricte de communication avant toute modification de fichiers structurants ou partagés (ex: configuration de build, gestion de base de données/migrations) afin d'éviter des conflits bloquants pour les autres équipes.
+  
+- **Fluidification de la communication inter-groupes :** Améliorer les canaux de coordination avec les équipes en aval ou plus isolées pour réduire les frictions et faciliter l'intégration de leurs briques dans le projet global.
