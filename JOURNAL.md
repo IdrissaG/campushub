@@ -72,6 +72,23 @@ En comparant votre entité `Utilisateur.java` avec la table créée en V3, on a 
 - docker system prune nettoie les images et volumes orphelins avant un test propre
 - Le nginx.conf doit avoir try_files pour que le routing Angular (SPA) fonctionne correctement côté frontend
 
+### Jour 10 - G2 (Bilan final, 2 semaines)
+
+## Appris
+- Construire une API REST couche par couche (contrôleur / service / repository) en partant du stockage en mémoire jusqu'à la persistance JPA/PostgreSQL, sans tout casser à chaque étape
+- Documenter au fur et à mesure dans Swagger plutôt qu'à la fin évite d'accumuler une dette de documentation
+- Sécuriser une API par rôle avec `@PreAuthorize` reste simple tant que le contrat des DTO est figé tôt (notre `EtudiantRequest` n'a quasiment pas bougé depuis le jour 3)
+- Un Dockerfile multi-stage (Maven → JRE Alpine) réduit fortement la taille de l'image finale, et le chemin exact du Dockerfile (`docker/backend/` vs `docker/back/`) compte autant que son contenu quand plusieurs groupes doivent s'y référencer
+
+## Ce qui a bien fonctionné dans la collaboration à 8 groupes
+- Le format `ErreurResponse` défini par G1 dès le jour 3 a été réutilisé tel quel jusqu'au jour 8 par G7 côté frontend, sans aucune divergence à corriger
+- Les points de dépendance explicitement annoncés dans les fiches de tâches quotidiennes (CORS pour G6, contrat Swagger pour G7, JWT de G5) ont évité la plupart des blocages surprises
+- La redistribution du périmètre de G8 au jour 9 (Docker/CI répartis sur les 7 groupes restants) s'est faite sans réel retard grâce au séquencement clair (matin : Dockerfiles en parallèle, après-midi : intégration par G4 puis G1)
+
+## Ce qui pourrait être amélioré pour une prochaine session
+- Certains noms de dossiers (`docker/backend` vs `docker/back`) étaient ambigus entre la fiche de tâches et l'existant du repo — un nommage figé dès le départ aurait évité une clarification de dernière minute
+- Le pipeline CI n'a eu de service PostgreSQL qu'au jour 9 ; des tests d'intégration (`@ActiveProfiles("test")`) existaient avant sans pouvoir tourner en CI jusque-là
+- Prévoir un canal dédié aux annonces de changement de contrat (DTO, format d'erreur) aurait fluidifié la coordination inter-groupes plutôt que de compter sur le stand-up du matin
 
 
 ## Bilan du groupe G6 (Frontend Core)
