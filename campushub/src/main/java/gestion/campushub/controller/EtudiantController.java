@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -61,10 +62,14 @@ public class EtudiantController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Créer un nouvel étudiant")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Étudiant créé"),
-        @ApiResponse(responseCode = "400", description = "Données invalides")
+        @ApiResponse(responseCode = "400", description = "Données invalides"),
+        @ApiResponse(responseCode = "401", description = "Token manquant ou invalide"),
+        @ApiResponse(responseCode = "403", description = "Réservé au rôle ADMIN"),
+        @ApiResponse(responseCode = "409", description = "Cet email est déjà utilisé")
     })
     public ResponseEntity<EtudiantResponse> create(@Valid @RequestBody EtudiantRequest request) {
         Etudiant entity = EtudiantMapper.toEntity(request);
@@ -75,11 +80,14 @@ public class EtudiantController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Modifier un étudiant")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Étudiant modifié"),
         @ApiResponse(responseCode = "404", description = "Étudiant non trouvé"),
-        @ApiResponse(responseCode = "400", description = "Données invalides")
+        @ApiResponse(responseCode = "400", description = "Données invalides"),
+        @ApiResponse(responseCode = "401", description = "Token manquant ou invalide"),
+        @ApiResponse(responseCode = "403", description = "Réservé au rôle ADMIN")
     })
     public ResponseEntity<EtudiantResponse> update(
             @PathVariable Long id,
@@ -92,10 +100,13 @@ public class EtudiantController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Supprimer un étudiant")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "204", description = "Étudiant supprimé"),
-        @ApiResponse(responseCode = "404", description = "Étudiant non trouvé")
+        @ApiResponse(responseCode = "404", description = "Étudiant non trouvé"),
+        @ApiResponse(responseCode = "401", description = "Token manquant ou invalide"),
+        @ApiResponse(responseCode = "403", description = "Réservé au rôle ADMIN")
     })
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         boolean deleted = service.deleteEtudiant(id);
