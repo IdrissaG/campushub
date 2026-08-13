@@ -11,4 +11,9 @@ import { AuthService } from './services/auth.service';
 export class App {
   protected readonly title = signal('campushub-front');
   authService = inject(AuthService);
+  logout(): void {
+    this.authService.logout();
+  }
 }
+
+

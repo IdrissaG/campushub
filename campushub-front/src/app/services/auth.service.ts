@@ -3,8 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { LoginRequest, AuthResponse } from '../model/auth.interface';
+
+
+import { LoginRequest, AuthResponse, RegisterRequest} from '../model/auth.interface';
 import { environment } from '../../environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -36,13 +39,20 @@ export class AuthService {
   }
 
   logout(): void {
-    // Nettoie localStorage et remet les signals à null
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this.tokenSignal.set(null);
     this.roleSignal.set(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/etudiants']);
   }
+
+  register(data: RegisterRequest): Observable<AuthResponse> {
+  return this.http
+    .post<AuthResponse>('http://localhost:8080/api/auth/register', data)
+    .pipe(
+      tap(response => this.stockerSession(response))
+    );
+}
 
   // Appelé par l'intercepteur pour récupérer le token à injecter dans les requêtes
   getToken(): string | null {
@@ -52,10 +62,12 @@ export class AuthService {
   private stockerSession(response: AuthResponse): void {
     localStorage.setItem('token', response.token);
     localStorage.setItem('role', response.role);
-    // Met à jour les signals — tout ce qui en dépend se rafraîchit automatiquement
+    // Met à jour les signals: tout ce qui en dépend se rafraîchit automatiquement
     this.tokenSignal.set(response.token);
     this.roleSignal.set(response.role);
   }
+
+
 }
 
 

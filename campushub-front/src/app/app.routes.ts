@@ -6,6 +6,7 @@ import { NotFoundComponent } from './components/not-found-component/not-found-co
 import { authGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/login-component/login-component';
 import { adminGuard } from './guards/admin.guards';
+import { RegisterComponent } from './components/register-component/register-component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'etudiants', pathMatch: 'full' },
@@ -19,6 +20,8 @@ export const routes: Routes = [
   { path: 'etudiants/:id', component: EtudiantDetailComponent },
   
   { path: 'login', component: LoginComponent},
+
+  { path: 'register', component: RegisterComponent },
 
   { path: '**', component: NotFoundComponent }
 
